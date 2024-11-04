@@ -9,6 +9,7 @@ from .models import Choice, Question
 
 import base64
 import openai
+from pathlib import Path
 
 openai.api_key="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"
 
@@ -49,11 +50,21 @@ def get_completion(image_url):
             return "No response was received from GPT API."
     except Exception as e:
         return f"An error occurred: {str(e)}"
+    
+def get_tts(prompt):
+    speech_file_path = Path(__file__).parent / "static/polls/sounds/speech.mp3"
+    with openai.audio.speech.with_streaming_response.create(
+        model="tts-1-hd",
+        voice="nova",
+        input=prompt,
+    ) as response:
+        response.stream_to_file(speech_file_path)
 
 def query_view(request):
     if request.method == 'POST':
         image_url = str(request.POST.get('prompt'))
         response = get_completion(image_url)
+        get_tts(response)
         return JsonResponse({'response':response})
     return render(request, 'polls/gpt.html')
 

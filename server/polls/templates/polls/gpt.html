@@ -40,6 +40,11 @@
 					dataType: 'json', 
 					success: function(data) { 
 						$('#response').append('<p>('+ time + ') <i class="bi bi-robot"></i>: ' + data.response + '</p>'); 
+						// 오디오 재생
+						var audio = new Audio('/static/polls/sounds/speech.mp3');
+						audio.play().catch(function(error) {
+							console.log("오디오 재생 실패:", error);
+						});
 					} 
 				}); 
 			}); 
@@ -62,8 +67,8 @@
 		<div class="mb-3"> 
 			<h6>Response:</h6> 
 			<div class="container border overflow-auto h-50" id="response"></div> 
-			
 		</div> 
 	</div> 
+	<audio id="ttsAudio" style="display: none;"></audio>
 </body> 
 </html> 
