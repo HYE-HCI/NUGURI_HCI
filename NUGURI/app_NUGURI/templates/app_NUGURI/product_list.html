@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>인간컴퓨터상호작용 - HCI</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+        }
+        /* 사이드바 스타일 */
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            margin: 120px 0 20px;
+        }
+        .sidebar button {
+            padding: 10px 80px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #c6aee4;
+            color: rgb(6, 2, 8);
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+        .sidebar button:hover {
+            background-color: #fbfbfb;
+        }
+        /* 고정된 타이틀 스타일 */
+        .title {
+            position: fixed;
+            top: 10px;
+            left: 250px;
+            width: calc(100% - 220px);
+            background-color: white;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        .container {
+            text-align: center;
+            margin-left: 220px;
+            margin-top: 80px;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-items: center;
+        }
+        .image-grid img {
+            max-width: 60%;
+            height: auto;
+        }
+        /* 숨김 클래스 */
+        .hidden {
+            display: none;
+        }
+        .dotpad-button {
+            position: fixed;  
+            top: 40px;  
+            left: 20px;  
+            width: 200px;  
+            background-color: #c6aee4; 
+            color: rgb(6, 2, 8);  
+            padding: 15px 20px;  
+            font-size: 20px;  
+            border: none;  
+            border-radius: 4px;  
+            cursor: pointer;  
+            z-index: 100; 
+            text-align: center; 
+            transition: background-color 0.3s;
+        }
+        .dotpad-button:hover {
+            background-color: #fbfbfb;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="dotpadFunction()" class="dotpad-button">DotPad</button>
+    <!-- 사이드바 시작 -->
+    <div class="sidebar">
+        <h2>카테고리</h2>
+        <button onclick="filterImages('all')">전체</button>
+        <button onclick="filterImages('top')">상의</button>
+    </div>
+    <!-- 고정된 타이틀 -->
+    <div class="title">
+        <h1>인간컴퓨터상호작용 - HCI</h1>
+    </div>
+    <!-- 메인 콘텐츠 시작 -->
+    <div class="container">
+        <div class="image-grid" id="imageGrid">
+            {% for product in products %}
+                <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="top">
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function filterImages(category) {
+            const images = document.querySelectorAll('#imageGrid img');
+            images.forEach(img => {
+                if (category === 'all') {
+                    img.classList.remove('hidden');
+                } else {
+                    if (img.classList.contains(category)) {
+                        img.classList.remove('hidden');
+                    } else {
+                        img.classList.add('hidden');
+                    }
+                }
+            });
+        }
+        // DotPad 버튼에 대한 함수
+        function dotpadFunction() {
+            // alert('DotPad 버튼이 클릭되었습니다!');
+        }
+        // 초기화 시 전체 이미지 표시
+        window.onload = () => filterImages('all');
+    </script>
+</body>
+</html>
