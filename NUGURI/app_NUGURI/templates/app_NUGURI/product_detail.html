@@ -1,5 +1,12 @@
-<!-- product_detail.html -->
 <h1>{{ product.name }}</h1>
 <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
-<p>{{ product.description }}</p>
+<p>{{ product.description|linebreaks }}</p>
+
+<!-- 원본 제품 페이지로 이동하는 링크 -->
+<p>
+    <a href="{{ product.original_url }}" target="_blank" rel="noopener noreferrer">
+        이 제품을 판매하는 페이지로 이동하기
+    </a>
+</p>
+
 <a href="{% url 'product_list' %}">목록으로 돌아가기</a>
