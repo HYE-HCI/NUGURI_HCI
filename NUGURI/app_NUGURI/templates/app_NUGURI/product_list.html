@@ -80,7 +80,7 @@
             width: 200px;  
             background-color: #c6aee4; 
             color: rgb(6, 2, 8);  
-            padding: 15px 20px;  
+            padding: 8px 15px;  
             font-size: 20px;  
             border: none;  
             border-radius: 4px;  
@@ -95,7 +95,10 @@
     </style>
 </head>
 <body>
-    <button onclick="dotpadFunction()" class="dotpad-button">DotPad</button>
+    <button id="connectbutton" class="dotpad-button">Connect</button>
+    <button id="disconnectbutton" class="dotpad-button" style="top: 80px;">Disconnect</button>
+
+
     <!-- 사이드바 시작 -->
     <div class="sidebar">
         <h2>카테고리</h2>
@@ -132,12 +135,12 @@
                 }
             });
         }
-        // DotPad 버튼에 대한 함수
-        function dotpadFunction() {
-            // alert('DotPad 버튼이 클릭되었습니다!');
-        }
+
         // 초기화 시 전체 이미지 표시
         window.onload = () => filterImages('all');
+    </script>
+    {% load static %}
+    <script type="module" src="{% static 'DotPad_CSUNdemo_chart2.js' %}"></script>
     </script>
 </body>
 </html>

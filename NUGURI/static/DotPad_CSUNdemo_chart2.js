@@ -1,12 +1,11 @@
-import { DotPad } from "../static/DotPad_Class.js"
+import { DotPad } from "./DotPad_Class.js";
 let myDotPad = new DotPad();
 
 
-document.getElementById("connectbutton").addEventListener("click", onConnectButtonClick, false);
-document.getElementById("disconnectbutton").addEventListener("click", onDisconnectButtonClick, false);
-//document.getElementById("s1").addEventListener("click", onS1ButtonClick, false);
-//document.getElementById("s4").addEventListener("click", onS4ButtonClick, false);
-//document.getElementById("s6").addEventListener("click", onS6ButtonClick, false); //테스트 버튼 추가
+
+document.getElementById("connectbutton")?.addEventListener("click", onConnectButtonClick);
+document.getElementById("disconnectbutton")?.addEventListener("click", onDisconnectButtonClick);
+
 
 //블루투스 연결을 위한 함수들
 async function onConnectButtonClick() {
