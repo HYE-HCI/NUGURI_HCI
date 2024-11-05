@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -92,6 +91,7 @@
         .dotpad-button:hover {
             background-color: #fbfbfb;
         }
+
     </style>
 </head>
 <body>
@@ -109,11 +109,10 @@
     <!-- 메인 콘텐츠 시작 -->
     <div class="container">
         <div class="image-grid" id="imageGrid">
-            {% for product in products %}
-                <a href="{% url 'product_detail' product.id %}">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="top">
-                </a>
-            {% endfor %}
+            <img src="images/image 1.jpg" alt="상의 이미지 1" class="top">
+            <img src="images/image 2.jpg" alt="상의 이미지 2" class="top">
+            <img src="images/image 3.jpg" alt="상의 이미지 3" class="top">
+            <img src="images/image 4.jpg" alt="상의 이미지 4" class="top">
         </div>
     </div>
 
