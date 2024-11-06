@@ -97,6 +97,7 @@ def edge_detection_with_mask(image_path, mask, output_size=(40, 40)):
     return formatted_outputs 
 
 def process_image(image_path):
+    print('함수 실행되나')
     # 세그멘테이션 수행
     mask = segment_image(image_path)
     
@@ -106,10 +107,10 @@ def process_image(image_path):
     return binary_arrays
 
 # 테스트 실행
-image_path = "C:/Users/kdh03/OneDrive/Desktop/NUGURI_HCI/NUGURI/KakaoTalk_20241101_153856002_01.jpg"
-binary_arrays = process_image(image_path)
+# image_path = "C:/Users/kdh03/OneDrive/Desktop/NUGURI_HCI/NUGURI/KakaoTalk_20241101_153856002_01.jpg"
+# binary_arrays = process_image(image_path)
 
-# 예시로 결과 출력 ... 
-for i, binary_array in enumerate(binary_arrays):
-    print(f"2D 이진 배열 {i+1}:")
-    print(binary_array)
+# # 예시로 결과 출력 ... 
+# for i, binary_array in enumerate(binary_arrays):
+#     print(f"2D 이진 배열 {i+1}:")
+#     print(binary_array)
