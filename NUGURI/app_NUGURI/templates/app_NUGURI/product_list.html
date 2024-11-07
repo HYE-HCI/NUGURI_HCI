@@ -1,4 +1,17 @@
 {% load static %}
+
+<h1>제품 목록</h1>
+<ul>
+    {% for product in products %}
+        <li>
+            <a href="{% url 'product_detail' product.id %}">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100" height="100">
+                {{ product.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
