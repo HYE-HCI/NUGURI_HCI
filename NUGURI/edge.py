@@ -1,9 +1,12 @@
 import onnxruntime as ort
 import numpy as np
 import cv2
+import os
 
-segmentation_model_path = "C:/Users/kdh03/OneDrive/Desktop/NUGURI_HCI/NUGURI/clothes_seg.onnx"
-edge_detection_model_path = "C:/Users/kdh03/OneDrive/Desktop/NUGURI_HCI/NUGURI/edge_detection.onnx"
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+segmentation_model_path = os.path.join(base_dir, "clothes_seg.onnx")
+edge_detection_model_path = os.path.join(base_dir, "edge_detection.onnx")
 
 segmentation_session = ort.InferenceSession(segmentation_model_path)
 edge_session = ort.InferenceSession(edge_detection_model_path)
@@ -97,7 +100,6 @@ def edge_detection_with_mask(image_path, mask, output_size=(40, 40)):
     return formatted_outputs 
 
 def process_image(image_path):
-    print('함수 실행되나')
     # 세그멘테이션 수행
     mask = segment_image(image_path)
     

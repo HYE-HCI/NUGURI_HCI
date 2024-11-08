@@ -28,8 +28,8 @@ document.getElementById("processImageBtn").addEventListener("click", async funct
         });
 
         if (response.ok) {
-            const result = await response.json();
-            resultDiv.innerHTML = "<h3>처리 결과:</h3><pre>" + JSON.stringify(result, null, 2) + "</pre>";
+            const result = await response.text();
+            resultDiv.innerHTML = "<pre>" + JSON.stringify(result, null, 2) + "</pre>";
         } else {
             resultDiv.innerHTML = "<p>이미지 처리를 실패했습니다.</p>";
         }
