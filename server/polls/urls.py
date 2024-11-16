@@ -1,12 +1,9 @@
 from django.urls import path
-
 from . import views
 
 app_name = "polls"
 urlpatterns = [
-    path("", views.IndexView.as_view(), name="index"),
-    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
-    path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
-    path("<int:question_id>/vote/", views.vote, name="vote"),
-    path('hello', views.query_view, name='query_view'),
+    path('', views.main_view, name='main'),  # 메인 페이지 URL 추가
+    path('analyze_image', views.analyze_image, name='analyze_image'),
+    path('process_audio', views.process_audio, name='process_audio'),
 ]
