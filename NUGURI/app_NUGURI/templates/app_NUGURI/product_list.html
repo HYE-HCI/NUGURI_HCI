@@ -1,22 +1,19 @@
-{% load static %}
-
-<h1>제품 목록</h1>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>인간컴퓨터상호작용 - HCI</title>
+    <h2>제품 목록</h2>
 <ul>
     {% for product in products %}
         <li>
-            <a href="{% url 'product_detail' product.id %}">
+            <a href="#" onclick="loadPage('{% url 'product_detail' product.id %}'); return false;">
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100" height="100">
                 {{ product.name }}
             </a>
         </li>
     {% endfor %}
 </ul>
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>인간컴퓨터상호작용 - HCI</title>
     <style>
         body {
             display: flex;
@@ -72,15 +69,10 @@
             margin-left: 220px;
             margin-top: 80px;
         }
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            justify-items: center;
-        }
-        .image-grid img {
-            max-width: 60%;
-            height: auto;
+        /* AJAX 콘텐츠 영역 */
+        #content {
+            margin-left: 220px;
+            margin-top: 80px;
         }
         /* 숨김 클래스 */
         .hidden {
@@ -111,8 +103,7 @@
     <button id="connectbutton" class="dotpad-button">Connect</button>
     <button id="disconnectbutton" class="dotpad-button" style="top: 80px;">Disconnect</button>
 
-
-    <!-- 사이드바 시작 -->
+    <!-- 사이드바 -->
     <div class="sidebar">
         <h2>카테고리</h2>
         <button onclick="filterImages('all')">전체</button>
@@ -122,38 +113,35 @@
     <div class="title">
         <h1>인간컴퓨터상호작용 - HCI</h1>
     </div>
-    <!-- 메인 콘텐츠 시작 -->
-    <div class="container">
-        <div class="image-grid" id="imageGrid">
-            {% for product in products %}
-                <a href="{% url 'product_detail' product.id %}">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="top">
-                </a>
-            {% endfor %}
-        </div>
+    <!-- 콘텐츠 영역 -->
+    <div id="content">
+        <!-- AJAX로 콘텐츠가 로드될 영역 -->
     </div>
 
     <script>
-        function filterImages(category) {
-            const images = document.querySelectorAll('#imageGrid img');
-            images.forEach(img => {
-                if (category === 'all') {
-                    img.classList.remove('hidden');
-                } else {
-                    if (img.classList.contains(category)) {
-                        img.classList.remove('hidden');
-                    } else {
-                        img.classList.add('hidden');
-                    }
-                }
-            });
-        }
+        // 페이지 초기 로드
+        window.onload = function () {
+            loadPage("{% url 'product_list' %}");
+        };
 
-        // 초기화 시 전체 이미지 표시
-        window.onload = () => filterImages('all');
+        // AJAX 페이지 로딩 함수
+        async function loadPage(url) {
+            const contentDiv = document.getElementById("content");
+            try {
+                const response = await fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } });
+                if (response.ok) {
+                    const html = await response.text();
+                    contentDiv.innerHTML = html;
+                } else {
+                    contentDiv.innerHTML = `<p>페이지를 로드할 수 없습니다.</p>`;
+                }
+            } catch (error) {
+                console.error("AJAX 요청 중 오류 발생:", error);
+                contentDiv.innerHTML = `<p>서버와의 통신 중 오류가 발생했습니다.</p>`;
+            }
+        }
     </script>
     {% load static %}
     <script type="module" src="{% static 'DotPad_CSUNdemo_chart2.js' %}"></script>
-    </script>
 </body>
 </html>
