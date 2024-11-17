@@ -23,11 +23,12 @@
             justify-content: center;
             align-items: flex-start;
             margin: 0;
+            flex-wrap: wrap;
         }
         /* 사이드바 스타일 */
         .sidebar {
             width: 200px;
-            background-color: #f4f4f4;
+            background-color: #ffffff;
             padding: 20px;
             position: fixed;
             left: 0;
@@ -39,44 +40,52 @@
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
         .sidebar h2 {
-            margin: 120px 0 20px;
+            margin: 180px 0 20px;
         }
         .sidebar button {
             padding: 10px 80px;
-            font-size: 16px;
+            font-size: 20px;
             cursor: pointer;
             border: none;
-            background-color: #c6aee4;
-            color: rgb(6, 2, 8);
+            background-color: #5c5d62;
+            color: rgb(5, 0, 44);
             border-radius: 4px;
             transition: background-color 0.3s;
             margin-bottom: 10px;
         }
         .sidebar button:hover {
-            background-color: #fbfbfb;
+            background-color: #ffffff;
         }
         /* 고정된 타이틀 스타일 */
         .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: fixed;
-            top: 10px;
-            left: 250px;
-            width: calc(100% - 220px);
-            background-color: white;
-            padding: 10px 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20vh; 
             text-align: center;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
+        .title img {
+            height: 180px;
+            width: auto;
+        }
         .container {
-            text-align: center;
-            margin-left: 220px;
-            margin-top: 80px;
+            margin-top: 20vh; /* 타이틀 높이 만큼 오프셋 */
+            padding-left: 200px; /* 사이드바 너비 만큼 오프셋 */
+            width: calc(100% - 200px); /* 사이드바 너비를 제외한 나머지 너비 */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .image-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            justify-items: center;
         }
         .image-grid img {
             max-width: 60%;
@@ -87,53 +96,58 @@
             display: none;
         }
         .dotpad-button {
-            position: fixed;  
-            top: 40px;  
-            left: 20px;  
-            width: 200px;  
-            background-color: #c6aee4; 
-            color: rgb(6, 2, 8);  
-            padding: 8px 15px;  
-            font-size: 20px;  
-            border: none;  
-            border-radius: 4px;  
-            cursor: pointer;  
-            z-index: 100; 
-            text-align: center; 
-            transition: background-color 0.3s;
+            display: flex;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            height: 15vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
         }
-        .dotpad-button:hover {
-            background-color: #fbfbfb;
+        .dotpad-button img {
+            max-height: 100%;
         }
     </style>
 </head>
 <body>
-    <button id="connectbutton" class="dotpad-button">Connect</button>
-    <button id="disconnectbutton" class="dotpad-button" style="top: 80px;">Disconnect</button>
-
-
     <!-- 사이드바 시작 -->
     <div class="sidebar">
-        <h2>카테고리</h2>
-        <button onclick="filterImages('all')">전체</button>
-        <button onclick="filterImages('top')">상의</button>
+        <h2>Category</h2>
+        <button onclick="filterImages('all')">All</button>
+        <button onclick="filterImages('top')">Top</button>
     </div>
     <!-- 고정된 타이틀 -->
     <div class="title">
-        <h1>인간컴퓨터상호작용 - HCI</h1>
-    </div>
+        <img src="{% static 'images/title_image.jpg' %}" alt="TouchShop Logo">
+    </div>    
     <!-- 메인 콘텐츠 시작 -->
     <div class="container">
         <div class="image-grid" id="imageGrid">
             {% for product in products %}
                 <a href="{% url 'product_detail' product.id %}">
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="top">
+                    <span class="product-name">{{ product.name }}</span>
                 </a>
             {% endfor %}
         </div>
     </div>
-
+    <a href="javascript:void(0);" onclick="toggleButton()" class="dotpad-button">
+        <img id="buttonImage" src="{% static 'images/off_button.jpg' %}" alt="OFF">
+    </a>
     <script>
+        function toggleButton() {
+            var buttonImg = document.getElementById('buttonImage');
+            if (buttonImg.alt === "OFF") {
+                buttonImg.src = "{% static 'images/on_button.jpg' %}";
+                buttonImg.alt = "ON";
+            } else {
+                buttonImg.src = "{% static 'images/off_button.jpg' %}";
+                buttonImg.alt = "OFF";
+            }
+        }
         function filterImages(category) {
             const images = document.querySelectorAll('#imageGrid img');
             images.forEach(img => {
@@ -152,7 +166,6 @@
         // 초기화 시 전체 이미지 표시
         window.onload = () => filterImages('all');
     </script>
-    {% load static %}
     <script type="module" src="{% static 'DotPad_CSUNdemo_chart2.js' %}"></script>
     </script>
 </body>

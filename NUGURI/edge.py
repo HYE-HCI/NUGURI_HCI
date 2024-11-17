@@ -2,11 +2,12 @@ import onnxruntime as ort
 import numpy as np
 import cv2
 
-segmentation_model_path = "C:/Users/kdh03/OneDrive/Desktop/NUGURI_HCI/NUGURI/clothes_seg.onnx"
-edge_detection_model_path = "C:/Users/kdh03/OneDrive/Desktop/NUGURI_HCI/NUGURI/edge_detection.onnx"
+segmentation_model_path = r"C:\Users\i0108\Desktop\NUGURI_HCI\NUGURI_HCI\NUGURI\NUGURI\clothes_seg.onnx"
+edge_detection_model_path = r"C:\Users\i0108\Desktop\NUGURI_HCI\NUGURI_HCI\NUGURI\NUGURI\edge_detection.onnx"
 
 segmentation_session = ort.InferenceSession(segmentation_model_path)
 edge_session = ort.InferenceSession(edge_detection_model_path)
+
 
 def segment_image(image_path):
     image = cv2.imread(image_path)
