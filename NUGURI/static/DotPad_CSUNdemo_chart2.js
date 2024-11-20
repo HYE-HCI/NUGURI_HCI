@@ -8,7 +8,7 @@ document.getElementById("disconnectbutton")?.addEventListener("click", onDisconn
 
 
 //블루투스 연결을 위한 함수들
-async function onConnectButtonClick() {
+export async function onConnectButtonClick() {
   try {
     console.log('Requesting Bluetooth Device...');
     //console.log('with ' + JSON.stringify(options));
@@ -18,7 +18,7 @@ async function onConnectButtonClick() {
     console.log('> Error:' + error);
   }
 }
-async function onDisconnectButtonClick() {
+export async function onDisconnectButtonClick() {
   try {
     myDotPad.disconnect();
   }
