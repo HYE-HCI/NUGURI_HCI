@@ -1,48 +1,186 @@
-<!DOCTYPE html>
-<html lang="ko">
+{% load static %}
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJAX 예제</title>
-    {% load static %}
-    <!-- 외부 CSS 파일 로드 -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- JavaScript 파일 로드 -->
-    <script src="{% static 'js/main.js' %}" defer></script>
+    <title>Product Page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- 외부 CSS 파일 -->
+    <style>
+        /* 기본 스타일 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            min-height: 100vh; /* 화면 전체 높이 */
+        }
+
+        /* 헤더 섹션 (타이틀 및 '목록으로 돌아가기') */
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%; 
+            padding: 10px 0; /* 내부 여백 */
+            box-sizing: border-box; /* 패딩 포함 박스 크기 계산 */
+            position: relative; 
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.3rem; /* 타이틀 크기 */
+            text-align: center;
+            flex: 1; /* 가운데 정렬 */
+        }
+
+        .header .top-left {
+            position: relative;
+            left: 8px;
+            top: 10px;
+        }
+
+        .top-left img {
+            width: 140px; /* 버튼 크기 */
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .top-left img:hover {
+            transform: scale(1.1); /* 확대 효과 */
+        }
+
+        /* 제품 이미지 */
+        .product-image {
+            margin: 20px 0;
+            width: 400px; /* 이미지 크기 */
+            height: auto;
+            display: block;
+        }
+
+        /* 설명 텍스트 */
+        .description {
+            max-width: 600px;
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* 하단 버튼 */
+        .bottom-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: auto;
+        }
+
+        .bottom-center img {
+            width: 200px; /* 버튼 크기 */
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .bottom-center img:hover {
+            transform: scale(1.1); /* 버튼 확대 효과 */
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .top-left img {
+                width: 80px; /* 작은 화면에서 버튼 축소 */
+            }
+
+            .product-image {
+                width: 300px; /* 이미지 축소 */
+            }
+
+            .bottom-center img {
+                width: 150px; /* 버튼 축소 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .top-left img {
+                width: 60px;
+            }
+
+            .bottom-center img {
+                width: 100px;
+            }
+
+            .product-image {
+                width: 200px; /* 더 작은 화면에서 이미지 축소 */
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <!-- 헤더 영역 -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">홈</a></li>
-                <li><a href="{% url 'product_list' %}">제품 목록</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- 콘텐츠 영역 -->
-    <main>
-        <div id="content">
-            <h1>{{ product.name }}</h1>
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
-            <p>{{ product.description|linebreaks }}</p>
-
-            <!-- 원본 제품 페이지로 이동하는 링크 -->
-            <p>
-                <a href="{{ product.original_url }}" target="_blank" rel="noopener noreferrer">
-                    이 제품을 판매하는 페이지로 이동하기
+    <div class="container">
+        <!-- 헤더 (목록으로 돌아가기 + 타이틀) -->
+        <div class="header">
+            <div class="top-left">
+                <a href="{% url 'product_list' %}">
+                    <img src="{% static 'images/return_button.jpg' %}" alt="Return to List">
                 </a>
-            </p>
-
-            <!-- 이미지 처리 버튼과 결과 영역 -->
-            <button id="processImageBtn">이미지 처리</button>
-            <div id="processResult"></div>
-
-            <!-- 목록으로 돌아가기 -->
-            <a href="{% url 'product_list' %}" id="backToListLink">목록으로 돌아가기</a>
+            </div>
+            <h1>{{ product.name }}</h1>
         </div>
-    </main>
 
+        <!-- 제품 이미지 -->
+        <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+
+        <!-- 제품 설명 -->
+        <p class="description">{{ product.description|linebreaks }}</p>
+
+        <!-- 하단 버튼 섹션 -->
+        <div class="bottom-center">
+            <a href="{{ product.original_url }}" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'images/shop_now_button.jpg' %}" alt="Shop Now">
+            </a>
+            <img id="processImageBtn" src="{% static 'images/image_processing.jpg' %}" alt="Process Image">
+        </div>
+
+        <!-- 이미지 처리 결과 -->
+        <div id="processResult"></div>
+    </div>
+
+    <script>
+        document.getElementById("processImageBtn").addEventListener("click", async function () {
+            const productId = "{{ product.id }}";
+            const resultDiv = document.getElementById("processResult");
+
+            try {
+                const response = await fetch(`/app/process_image/${productId}/`, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}" // CSRF 토큰 포함
+                    }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    resultDiv.innerHTML = "<h3>처리 결과:</h3><pre>" + JSON.stringify(result, null, 2) + "</pre>";
+                } else {
+                    resultDiv.innerHTML = "<p>이미지 처리를 실패했습니다.</p>";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                resultDiv.innerHTML = "<p>서버 오류가 발생했습니다.</p>";
+            }
+        });
+    </script>
 </body>
-</html>

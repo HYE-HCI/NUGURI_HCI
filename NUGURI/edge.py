@@ -11,6 +11,7 @@ edge_detection_model_path = os.path.join(base_dir, "edge_detection.onnx")
 segmentation_session = ort.InferenceSession(segmentation_model_path)
 edge_session = ort.InferenceSession(edge_detection_model_path)
 
+
 def segment_image(image_path):
     image = cv2.imread(image_path)
     if image is None:

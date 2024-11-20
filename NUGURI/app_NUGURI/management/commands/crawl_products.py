@@ -5,6 +5,7 @@ from urllib.request import urlopen
 import requests
 from django.core.files.base import ContentFile
 
+
 class Command(BaseCommand):
     help = 'Crawl products from SPAO website and save to the database'
 
