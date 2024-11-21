@@ -1,4 +1,4 @@
-from django.http import FileResponse, JsonResponse, HttpResponseNotFound
+from django.http import FileResponse, JsonResponse, HttpResponseNotFound , HttpResponse
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
@@ -16,10 +16,10 @@ def product_detail_view(request, product_id):
 
 # 이미지 처리 뷰 추가
 def process_product_image(request, product_id):
-    print('이미지 처리 뷰 버튼 눌러진거니')
     if request.method == 'POST':
         product = get_object_or_404(Product, id=product_id)
         image_path = product.image.path  # 이미지 파일 경로 가져오기
+        print('이미지 경로:', image_path)
         
         try:
             # 이미지 처리 함수 호출
@@ -29,12 +29,3 @@ def process_product_image(request, product_id):
             return JsonResponse({"error": str(e)}, status=500)
     else:
         return JsonResponse({"error": "Invalid request method"}, status=405)
-    
-
-# 닷패드 연동 버튼 액션 함수 추가, 추후 수정 예정
-def connect_action(request):
-    return HttpResponse("Connected successfully")
-
-
-def disconnect_action(request):
-    return HttpResponse("Disconeected successfully")
