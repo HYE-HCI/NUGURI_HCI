@@ -613,43 +613,11 @@ async function jsonread(json_name) {
 //   });
 
 // }
-export async function testDisplayOnDotPad(characters, positions) {
-  const response = await fetch("./static/woonk.json");
-  const jsonData = await response.json();
-  let result = []; 
-  console.log(characters);
-
-  for (let i = 0; i < characters.length; i++) {
-      const characterName = characters[i]; 
-      const x = positions[i]; 
-      const y = 35; 
-
-      let targetArray = null;
-
-      jsonData.forEach(item => {
-          const [name, array] = item;
-          if (name === characterName) {  
-              targetArray = array;
-          }
-      });
-
-      if (targetArray) {
-          console.log(`Found character array for ${characterName}:`, targetArray);
-
-          if (result.length === 0) {
-              result = merge(y, x, targetArray, pad_test()); 
-          } else {
-              result = merge(y, x, targetArray, result); 
-          }
-
-          console.log(`Result after merging ${characterName}:`, result);
-
-          var F1 = [];
-  
-      } else {
-          console.error(`Character ${characterName} not found in JSON data.`);
-      }
-  } F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(result));
+export async function testDisplayOnDotPad(result) {
+  console.log('result', result);
+  var F1 = [];
+  const array = [1,1,1,1,1,1,1]
+ F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(array));
     myDotPad.send(F1[0]);
 }
 

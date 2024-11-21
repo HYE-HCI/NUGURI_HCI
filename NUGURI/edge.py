@@ -79,7 +79,7 @@ def edge_detection_with_mask(image_path, mask, output_size=(40, 40)):
         mask[half_h:512, half_w:512],
     ]
 
-    formatted_outputs = []
+    resized_binary_edge_maps = []
     # 각 사분할에 대해 엣지 검출 수행
     for i, (img_part, mask_part) in enumerate(zip(image_quarters, mask_quarters)):
         # 이미지 전처리
@@ -109,20 +109,9 @@ def edge_detection_with_mask(image_path, mask, output_size=(40, 40)):
 
         # 크기 조정
         resized_binary_edge_map = cv2.resize(binary_edge_map, output_size, interpolation=cv2.INTER_NEAREST)
+        resized_binary_edge_maps.append(resized_binary_edge_map.tolist())  # JSON 호환 형식으로 변환
 
-      
-        formatted_output = "[\n"
-        for j, row in enumerate(resized_binary_edge_map):
-            formatted_output += " [" + ",".join(map(str, row)) + "]"
-            if j < len(resized_binary_edge_map) - 1:
-                formatted_output += ",\n"
-            else:
-                formatted_output += "\n"
-        formatted_output += "]"
-        
-        formatted_outputs.append(formatted_output) 
-
-    return formatted_outputs 
+    return resized_binary_edge_maps
 
 def process_image(image_path):
     # 세그멘테이션 수행

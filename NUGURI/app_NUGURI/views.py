@@ -24,8 +24,7 @@ def process_product_image(request, product_id):
         try:
             # 이미지 처리 함수 호출
             binary_arrays = process_image(image_path)
-            print('binary_arrays:', binary_arrays)
-            return HttpResponse("이미지 처리 완료") 
+            return JsonResponse({"binary_arrays": binary_arrays})
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
     else:

@@ -1,4 +1,4 @@
-import { onConnectButtonClick, onDisconnectButtonClick } from "./DotPad_CSUNdemo_chart2.js";
+import { onConnectButtonClick, onDisconnectButtonClick,testDisplayOnDotPad} from "./DotPad_CSUNdemo_chart2.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const processImageBtn = document.getElementById("processImageBtn");
@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         processImageBtn.addEventListener("click", async function () {
             const productId = this.dataset.id; // data-id에서 product_id 가져오기
             const resultDiv = document.getElementById("processResult");
-
-            console.log("Product ID:", productId); // 디버깅용 출력
-
+    
             // CSRF 토큰 가져오기
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
@@ -29,8 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(`Fetch request completed in ${(fetchEndTime - fetchStartTime).toFixed(2)} ms`);
 
                 if (response.ok) {
-                    const textResult = await response.text(); // 서버 응답을 텍스트로 처리
-                    resultDiv.innerHTML = `<p>${textResult}</p>`; // 텍스트 응답 출력
+                    const result = await response.json(); // JSON 데이터를 받아옴
+                    const binaryArrays = result.binary_arrays;
+                    testDisplayOnDotPad(binaryArrays);
+
                 } else {
                     resultDiv.innerHTML = "<p>이미지 처리를 실패했습니다.</p>";
                     console.error("Response error:", await response.text()); // 디버깅용 출력
