@@ -1,28 +1,39 @@
 import { onConnectButtonClick, onDisconnectButtonClick } from "./DotPad_CSUNdemo_chart2.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-    const contentDiv = document.getElementById("content");
-
-    // 이미지 처리 버튼
     const processImageBtn = document.getElementById("processImageBtn");
+
     if (processImageBtn) {
         processImageBtn.addEventListener("click", async function () {
-            const productId = "{{ product.id }}";
+            const productId = this.dataset.id; // data-id에서 product_id 가져오기
             const resultDiv = document.getElementById("processResult");
 
+            console.log("Product ID:", productId); // 디버깅용 출력
+
+            // CSRF 토큰 가져오기
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
             try {
+                const fetchStartTime = performance.now();
+
+                console.log("Sending fetch request...");
                 const response = await fetch(`/app/process_image/${productId}/`, {
                     method: "POST",
                     headers: {
-                        "X-CSRFToken": "{{ csrf_token }}" // CSRF 토큰 포함
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrfToken, // CSRF 토큰 추가
                     }
                 });
 
+                const fetchEndTime = performance.now();
+                console.log(`Fetch request completed in ${(fetchEndTime - fetchStartTime).toFixed(2)} ms`);
+
                 if (response.ok) {
-                    const result = await response.json();
-                    resultDiv.innerHTML = "<pre>" + JSON.stringify(result, null, 2) + "</pre>";
+                    const textResult = await response.text(); // 서버 응답을 텍스트로 처리
+                    resultDiv.innerHTML = `<p>${textResult}</p>`; // 텍스트 응답 출력
                 } else {
                     resultDiv.innerHTML = "<p>이미지 처리를 실패했습니다.</p>";
+                    console.error("Response error:", await response.text()); // 디버깅용 출력
                 }
             } catch (error) {
                 console.error("Error:", error);

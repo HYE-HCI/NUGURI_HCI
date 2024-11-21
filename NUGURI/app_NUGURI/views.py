@@ -30,12 +30,3 @@ def process_product_image(request, product_id):
             return JsonResponse({"error": str(e)}, status=500)
     else:
         return JsonResponse({"error": "Invalid request method"}, status=405)
-    
-
-# 닷패드 연동 버튼 액션 함수 추가, 추후 수정 예정
-def connect_action(request):
-    return HttpResponse("Connected successfully")
-
-
-def disconnect_action(request):
-    return HttpResponse("Disconeected successfully")

@@ -1,8 +1,9 @@
 {% load static %}
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
     <title>Product Page</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- 외부 CSS 파일 -->
     <style>
         /* 기본 스타일 */
         body {
@@ -151,36 +152,13 @@
             <a href="{{ product.original_url }}" target="_blank" rel="noopener noreferrer">
                 <img src="{% static 'images/shop_now_button.jpg' %}" alt="Shop Now">
             </a>
-            <img id="processImageBtn" src="{% static 'images/image_processing.jpg' %}" alt="Process Image">
+            <img id="processImageBtn" src="{% static 'images/image_processing.jpg' %}" alt="Process Image" data-id="{{ product.id }}">
         </div>
 
         <!-- 이미지 처리 결과 -->
         <div id="processResult"></div>
     </div>
 
-    <script>
-        document.getElementById("processImageBtn").addEventListener("click", async function () {
-            const productId = "{{ product.id }}";
-            const resultDiv = document.getElementById("processResult");
-
-            try {
-                const response = await fetch(`/app/process_image/${productId}/`, {
-                    method: "POST",
-                    headers: {
-                        "X-CSRFToken": "{{ csrf_token }}" // CSRF 토큰 포함
-                    }
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    resultDiv.innerHTML = "<h3>처리 결과:</h3><pre>" + JSON.stringify(result, null, 2) + "</pre>";
-                } else {
-                    resultDiv.innerHTML = "<p>이미지 처리를 실패했습니다.</p>";
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                resultDiv.innerHTML = "<p>서버 오류가 발생했습니다.</p>";
-            }
-        });
-    </script>
+    <!-- JavaScript 파일 로드 -->
+    <script type="module" src="{% static 'main.js' %}"></script>
 </body>
