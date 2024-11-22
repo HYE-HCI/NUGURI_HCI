@@ -20,24 +20,25 @@
             min-height: 100vh; /* 화면 전체 높이 */
         }
 
-        /* 헤더 섹션 (타이틀 및 '목록으로 돌아가기') */
+        /* 헤더 섹션 (타이틀, 돌아가기, 닷 패드 연동버튼)*/
         .header {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%; 
-            padding: 10px 0; /* 내부 여백 */
+            padding: 10px; /* 내부 여백 */
             box-sizing: border-box; /* 패딩 포함 박스 크기 계산 */
             position: relative; 
         }
 
         .header h1 {
             margin: 0;
-            font-size: 2.3rem; /* 타이틀 크기 */
+            font-size: 2rem; /* 타이틀 크기 */
             text-align: center;
             flex: 1; /* 가운데 정렬 */
+            white-space: normal;
         }
-
+        /* 목록으로 돌아가기 버튼 */
         .header .top-left {
             position: relative;
             left: 8px;
@@ -50,8 +51,28 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-
         .top-left img:hover {
+            transform: scale(1.1); /* 확대 효과 */
+        }
+
+        /* 닷패드 연동버튼 */
+        .header .dotpad-button {
+            /* display: flex; */
+            position: relative;
+            top: 20px;
+            right: 20px;
+            margin-left: auto;
+            /* width: 180px;
+            align-items: center;
+            justify-content: center; */
+        }
+        .dotpad-button img {
+            height: auto;
+            width: 140px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .dotpad-button img:hover {
             transform: scale(1.1); /* 확대 효과 */
         }
 
@@ -100,6 +121,10 @@
                 width: 80px; /* 작은 화면에서 버튼 축소 */
             }
 
+            .dotpad-button img{
+                width: 80px;
+            }
+
             .product-image {
                 width: 300px; /* 이미지 축소 */
             }
@@ -115,6 +140,10 @@
             }
 
             .top-left img {
+                width: 60px;
+            }
+
+            .dotpad-button img{
                 width: 60px;
             }
 
@@ -139,6 +168,11 @@
                 </a>
             </div>
             <h1>{{ product.name }}</h1>
+            <div class="dotpad-button">
+                <a href="javascript:void(0);" onclick="toggleButton()">
+                    <img id="buttonImage" src="{% static 'images/off_button.jpg' %}" alt="OFF">
+                </a>
+            </div>
         </div>
 
         <!-- 제품 이미지 -->
@@ -158,7 +192,7 @@
         <!-- 이미지 처리 결과 -->
         <div id="processResult"></div>
     </div>
-
-    <!-- JavaScript 파일 로드 -->
+    <!-- 외부 자바스크립트 파일 추가 -->
+    <script type="module" src="{% static 'DotPad_CSUNdemo_chart2.js' %}"></script>
     <script type="module" src="{% static 'main.js' %}"></script>
 </body>

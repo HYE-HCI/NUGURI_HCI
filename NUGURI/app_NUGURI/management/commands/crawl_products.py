@@ -10,7 +10,7 @@ class Command(BaseCommand):
     help = 'Crawl products from SPAO website and save to the database'
 
     def handle(self, *args, **kwargs):
-        url = 'https://spao.elandmall.co.kr/i/item?itemNo=2206858302&lowerVendNo=LV16003579'
+        url = 'https://spao.elandmall.co.kr/i/item?itemNo=2212607810&lowerVendNo=LV16003579&pageId=1732258330540&preCornerNo=R01402002_srchOutcome'
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
 
