@@ -23,25 +23,7 @@ class DotPad {
     /* Data for rendering (JSON, image pixel, variables) declaration */
 
     // Image object, height/width, path information
-    this.imageObj = new Image();
-    this.imageHeight = 0;
-    this.imageWidth = 0;
-    this.imageRatio = 1;
-    this.imagePath = "";
-    this.jsonPath = "";
-    this.ind = 0;
 
-    this.tutorial = 0;
-    this.tutorial_ind = 0;
-    this.tutorial_state = "F1";
-
-    this.play_state = "REPLAY";
-    this.playing = 0;
-    this.reset = 0;
-    this.send_sound = 0;
-    this.resend = 0;
-    this.target = 0;
-    this.did_s = [];
 
     //JSON object declaration (JS doesn't need to declare type here, but anticipating that for TS)
     this.JSONObj;
@@ -104,6 +86,8 @@ class DotPad {
 
     // Load predetermined Tactons
     this.loadTactons('./preprocessor_JSON/tactons.json');
+
+    this.currentIndex = 0;
   }
 
   //preloading of the tacton fronm json
@@ -197,8 +181,6 @@ class DotPad {
    * Launch Bluetooth device chooser and connect to the selected device.
    */
   async connect() {
-    console.log('bluetooth' in navigator)
-    console.log(navigator)
     this._device = await navigator.bluetooth.requestDevice({
       // filters: [...] <- Prefer filters to save energy & show relevant devices.
       // acceptAllDevices: true,
@@ -535,6 +517,7 @@ class DotPad {
    * @param {Object} event
    * @private
    */
+  
   _handleCharacteristicValueChanged(event) {
     const value = event.target.value;
     const length = event.target.value.byteLength;
@@ -558,244 +541,66 @@ class DotPad {
     */
    
 
-    // 튜토리얼 실행
-    if (this.tutorial == 1) {
+    
+    //버튼 함수 매핑 
       if (intvalue[6] == 18) {
-        //화살표 버튼, 장면 전환
+        //화살표 왼쪽, 오른쪽
         if (intvalue[9] == 4 && intvalue[12] == 176) {
+          console.log("이전 버튼이 눌렸습니다");
+          const binaryArrays = window.binaryArrays;
+          this.currentIndex = (this.currentIndex-1) % binaryArrays.length;
+          console.log('Current Index:', this.currentIndex);
 
-          this.playing = 1;
-          this.tutorial_ind -= 1;
-          if (this.tutorial_ind == -1 && this.tutorial_state == "F1") {
-            this.tutorial_ind = 3;
-          } else if (this.tutorial_ind == -1 && this.tutorial_state == "F2") {
-            this.tutorial_ind = 8;
-          }
-
-          console.log("왼쪽 화살표 누름", this.tutorial_ind);
-
+        if (window.testDisplayOnDotPad) {
+            window.testDisplayOnDotPad(binaryArrays[this.currentIndex]);
+        } else {
+            console.log("testDisplayOnDotPad 함수가 정의되어 있지 않습니다.");
+        }
         }
 
         else if (intvalue[9] == 2 && intvalue[12] == 182) {
-          this.tutorial_ind += 1;
-          this.playing = 1;
-          if ((this.tutorial_ind == 4 && this.tutorial_state == "F1") || (this.tutorial_ind == 9 && this.tutorial_state == "F2")) {
-            this.tutorial_ind = 0;
-          }
+          console.log("다음 버튼이 눌렸습니다");
+          const binaryArrays = window.binaryArrays;
+          this.currentIndex = (this.currentIndex+1) % binaryArrays.length;
+          console.log('Current Index:', this.currentIndex);
 
-          console.log("오른쪽 화살표 누름", this.tutorial_ind);
+        if (window.testDisplayOnDotPad) {
+            window.testDisplayOnDotPad(binaryArrays[this.currentIndex]);
+        } else {
+            console.log("testDisplayOnDotPad 함수가 정의되어 있지 않습니다.");
+        }
         }
 
 
-        //evoke functions when buttons down to up (of left/right)
-        setTimeout(() => {
-          this.playing = 0;
-        }, 2500);
-        console.log("2500 이후 playing: " + this.playing);
       }
 
-      //corresponding for button 1-4
-
+      //F1,2,3,4
       else if (intvalue[6] == 50) {
         switch (intvalue[8]) {
           case 128:
-            //btn 1: sound output
-            this.send_sound = 1;
+ 
             break;
           case 64:
-            //btn 2
-            this.tutorial_state = "F1";
-
+        
 
             break;
           case 32:
-            //btn 3
-            this.tutorial_state = "F2";
-
+  
             break;
           case 16:
-            //btn 4 리프래쉬
-            var audio = new Audio('/static/button_tts/초기화.wav');
-            // load
-            audio.load();
-
-            // 볼륨 설정
-            audio.volume = 1;
-
-            // 실행
-            audio.play();
-
-            this.resend = 1;
+         
             break;
         }
 
       }
 
-    }
+    
 
-    // 영상 실행을 위한 버튼 설계
-    else if (this.tutorial == 0) {
-      if (intvalue[6] == 18) {
-        //direction buttons. Left and right. saving "which button" was pushed.
-        if (intvalue[9] == 4 && intvalue[12] == 176) {
-          console.log("현재 playing: " + this.playing);
-          if (this.ind != 0 && this.playing == 0 && this.play_state == "STOP") {
-            this.ind -= 1;
-            this.playing = 1;
-            //var audio = new Audio('button_tts/beyond.wav');
-            var audio = new Audio('/static/button_tts/이전.wav');
-            // load
-            audio.load();
-
-            // 볼륨 설정
-            audio.volume = 1;
-
-            // 실행
-            audio.play();
-
-          } else if (this.ind == 0 && this.playing == 0 && this.play_state == "STOP") {
-            var audio = new Audio('/static/tts/noneS.wav');
-            // load
-            this.playing = 1;
-            audio.load();
-
-            // 볼륨 설정
-            audio.volume = 1;
-
-            // 실행
-            audio.play();
-          }
-
-
-        }
-        else if (intvalue[9] == 2 && intvalue[12] == 182) {
-          console.log("현재 playing: " + this.playing);
-          if (this.ind < this.did_s.length - 1 && this.playing == 0 && this.play_state == "STOP") {
-            this.ind += 1;
-            this.playing = 1;
-            //var audio = new Audio('button_tts/next.wav');
-            var audio = new Audio('/static/button_tts/다음.wav');
-            // load
-            audio.load();
-
-            // 볼륨 설정
-            audio.volume = 1;
-
-            // 실행
-            audio.play();
-
-          } else if (this.ind == this.did_s.length - 1 && this.playing == 0 && this.play_state == "STOP") {
-            var audio = new Audio('/static/tts/noneS.wav');
-            // load
-            this.playing = 1;
-            audio.load();
-
-            // 볼륨 설정
-            audio.volume = 1;
-
-            // 실행
-            audio.play();
-          }
-
-        }
-        //연속 눌림 방지
-        setTimeout(() => {
-          this.playing = 0;
-        }, 2500);
-
-        console.log("2500 이후 playing: " + this.playing);
-      }
-
-      //corresponding for button 1-4
-
-      else if (intvalue[6] == 50) {
-        switch (intvalue[8]) {
-          case 128:
-            //btn 1: sound output
-            if (this.play_state == "STOP") {
-              this.send_sound = 1;
-              console.log("sound");
-            }
-            break;
-          case 64:
-            //btn 2: 영상 실행 및 정지
-            if (this.play_state == "REPLAY") {
-              this.play_state = "STOP"
-              //var audio = new Audio('button_tts/pause.wav');
-              var audio = new Audio('/static/button_tts/일시정지.wav');
-              // load
-              audio.load();
-
-              // 볼륨 설정
-              audio.volume = 1;
-
-              // 실행
-              audio.play();
-            }
-            else if (this.play_state == "STOP") {
-              this.play_state = "REPLAY"
-              //var audio = new Audio('button_tts/resume.wav');
-              var audio = new Audio('/static/button_tts/재생.wav');
-              // load
-              audio.load();
-
-              // 볼륨 설정
-              audio.volume = 1;
-
-              // 실행
-              audio.play();
-            }
-
-            break;
-          case 32:
-            //btn 2: 영상 처음부터 다시 실행
-            console.log("버튼누름 리셋", this.reset);
-
-            //var audio = new Audio('button_tts/replay.wav');
-            var audio = new Audio('/static/button_tts/처음부터.wav');
-            // load
-            audio.load();
-
-            // 볼륨 설정
-            audio.volume = 1;
-
-            // 실행
-            audio.play();
-
-            this.reset = 1;
-            //btn 3: switch tacton/segment modes (map and photo)
-
-            break;
-          case 16:
-            //btn 4: 리프레쉬
-            //var audio = new Audio('button_tts/make.wav');
-            if (this.play_state == "STOP") {
-              var audio = new Audio('/static/button_tts/초기화.wav');
-              // load
-              audio.load();
-
-              // 볼륨 설정
-              audio.volume = 1;
-
-              // 실행
-              audio.play();
-
-              this.resend = 1;
-            }
-            break;
-
-        }
-
-      }
-    }
-
+    
 
   }
 
-  state() {
-    return this.play_state;
-  }
-
+ 
 
   /* UTILITIES */
   /**
