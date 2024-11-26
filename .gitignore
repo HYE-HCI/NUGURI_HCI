@@ -162,3 +162,4 @@ cython_debug/
 #.idea/
 
 *.onnx
+api_key.txt

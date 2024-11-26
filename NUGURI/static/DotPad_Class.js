@@ -86,6 +86,8 @@ class DotPad {
 
     // Load predetermined Tactons
     this.loadTactons('./preprocessor_JSON/tactons.json');
+
+    this.currentIndex = 0;
   }
 
   //preloading of the tacton fronm json
@@ -515,6 +517,7 @@ class DotPad {
    * @param {Object} event
    * @private
    */
+  
   _handleCharacteristicValueChanged(event) {
     const value = event.target.value;
     const length = event.target.value.byteLength;
@@ -543,11 +546,29 @@ class DotPad {
       if (intvalue[6] == 18) {
         //화살표 왼쪽, 오른쪽
         if (intvalue[9] == 4 && intvalue[12] == 176) {
+          console.log("이전 버튼이 눌렸습니다");
+          const binaryArrays = window.binaryArrays;
+          this.currentIndex = (this.currentIndex-1) % binaryArrays.length;
+          console.log('Current Index:', this.currentIndex);
 
+        if (window.testDisplayOnDotPad) {
+            window.testDisplayOnDotPad(binaryArrays[this.currentIndex]);
+        } else {
+            console.log("testDisplayOnDotPad 함수가 정의되어 있지 않습니다.");
+        }
         }
 
         else if (intvalue[9] == 2 && intvalue[12] == 182) {
-     
+          console.log("다음 버튼이 눌렸습니다");
+          const binaryArrays = window.binaryArrays;
+          this.currentIndex = (this.currentIndex+1) % binaryArrays.length;
+          console.log('Current Index:', this.currentIndex);
+
+        if (window.testDisplayOnDotPad) {
+            window.testDisplayOnDotPad(binaryArrays[this.currentIndex]);
+        } else {
+            console.log("testDisplayOnDotPad 함수가 정의되어 있지 않습니다.");
+        }
         }
 
 
