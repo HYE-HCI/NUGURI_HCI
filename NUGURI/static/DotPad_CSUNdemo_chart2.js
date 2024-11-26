@@ -1,32 +1,8 @@
 import { DotPad } from "./DotPad_Class.js";
 let myDotPad = new DotPad();
 
-
-
 document.getElementById("connectbutton")?.addEventListener("click", onConnectButtonClick);
 document.getElementById("disconnectbutton")?.addEventListener("click", onDisconnectButtonClick);
-
-
-//블루투스 연결을 위한 함수들
-export async function onConnectButtonClick() {
-  try {
-    console.log('Requesting Bluetooth Device...');
-    //console.log('with ' + JSON.stringify(options));
-    myDotPad.connect();
-
-  } catch (error) {
-    console.log('> Error:' + error);
-  }
-}
-export async function onDisconnectButtonClick() {
-  try {
-    myDotPad.disconnect();
-  }
-  catch (error) {
-    console.log('> Error:' + error);
-  }
-}
-
 
 //닷 패드에 보내기 위해 2진수를 16진수로 변환
 function hexa(a) {
