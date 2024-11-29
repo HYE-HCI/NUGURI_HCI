@@ -661,7 +661,7 @@ export async function testDisplayOnDotPad(result, position) {
   var array2 = merge(19, 40, result, pad_test());  
   array2 = merge(5,5,icons ,array2);
   console.log('arraywithicon', array2);
-  array2 = merge(20, 5, position, array2);
+  array2 = merge(27, 5, position, array2);
   console.log('arrayWithPosition', array2);
   F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(array2));
   myDotPad.send(F1[0]);
