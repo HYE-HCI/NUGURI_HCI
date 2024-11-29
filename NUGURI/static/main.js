@@ -1,6 +1,11 @@
 import { onConnectButtonClick, onDisconnectButtonClick,testDisplayOnDotPad} from "./DotPad_CSUNdemo_chart2.js";
 window.binaryArrays = [];
-
+window.positions = [ 
+    ["왼쪽 상단", [[1, 1, 1, 1, 1],[1,1,1,1,1]]],
+    ["오른쪽 상단", [[1, 0, 1, 0, 1],[1,0,1,0,1]]],
+    ["왼쪽 하단", [[0, 0, 1, 0, 0],[0,0,1,0,0]]],
+    ["오른쪽 하단", [[0, 1, 0, 1, 0],[0,1,0,1,0]]],
+];
 document.addEventListener("DOMContentLoaded", function () {
     const processImageBtn = document.getElementById("processImageBtn");
 
@@ -30,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (response.ok) {
                     const result = await response.json(); // JSON 데이터를 받아옴
                     window.binaryArrays = result.binary_arrays;
-                    testDisplayOnDotPad(window.binaryArrays[0]);
+                    testDisplayOnDotPad(window.binaryArrays[0],window.positions[0][1]);
 
                 } else {
                     resultDiv.innerHTML = "<p>이미지 처리를 실패했습니다.</p>";

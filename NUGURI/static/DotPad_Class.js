@@ -543,36 +543,59 @@ class DotPad {
 
     
     //버튼 함수 매핑 
-      if (intvalue[6] == 18) {
-        //화살표 왼쪽, 오른쪽
-        if (intvalue[9] == 4 && intvalue[12] == 176) {
+    if (intvalue[6] == 18) {
+      // 화살표 왼쪽
+      if (intvalue[9] == 4 && intvalue[12] == 176) {
           console.log("이전 버튼이 눌렸습니다");
           const binaryArrays = window.binaryArrays;
-          this.currentIndex = (this.currentIndex-1) % binaryArrays.length;
+          const positions = window.positions;
+  
+          if (!binaryArrays || binaryArrays.length === 0 || !positions || positions.length === 0) {
+              console.error("No binary arrays or positions available.");
+              return;
+          }
+  
+          // currentIndex 업데이트
+          this.currentIndex = (this.currentIndex - 1 + binaryArrays.length) % binaryArrays.length;
           console.log('Current Index:', this.currentIndex);
-
-        if (window.testDisplayOnDotPad) {
-            window.testDisplayOnDotPad(binaryArrays[this.currentIndex]);
-        } else {
-            console.log("testDisplayOnDotPad 함수가 정의되어 있지 않습니다.");
-        }
-        }
-
-        else if (intvalue[9] == 2 && intvalue[12] == 182) {
+  
+          const currentArray = binaryArrays[this.currentIndex];
+          const currentPosition = positions[this.currentIndex][1]; // 위치 데이터 추출
+  
+          if (window.testDisplayOnDotPad) {
+              // 이미지와 위치 데이터 전달
+              window.testDisplayOnDotPad(currentArray, currentPosition);
+          } else {
+              console.log("testDisplayOnDotPad 함수가 정의되어 있지 않습니다.");
+          }
+      }
+  
+      // 화살표 오른쪽
+      else if (intvalue[9] == 2 && intvalue[12] == 182) {
           console.log("다음 버튼이 눌렸습니다");
           const binaryArrays = window.binaryArrays;
-          this.currentIndex = (this.currentIndex+1) % binaryArrays.length;
+          const positions = window.positions;
+  
+          if (!binaryArrays || binaryArrays.length === 0 || !positions || positions.length === 0) {
+              console.error("No binary arrays or positions available.");
+              return;
+          }
+  
+          // currentIndex 업데이트
+          this.currentIndex = (this.currentIndex + 1) % binaryArrays.length;
           console.log('Current Index:', this.currentIndex);
-
-        if (window.testDisplayOnDotPad) {
-            window.testDisplayOnDotPad(binaryArrays[this.currentIndex]);
-        } else {
-            console.log("testDisplayOnDotPad 함수가 정의되어 있지 않습니다.");
-        }
-        }
-
-
+  
+          const currentArray = binaryArrays[this.currentIndex];
+          const currentPosition = positions[this.currentIndex][1]; // 위치 데이터 추출
+  
+          if (window.testDisplayOnDotPad) {
+              // 이미지와 위치 데이터 전달
+              window.testDisplayOnDotPad(currentArray, currentPosition);
+          } else {
+              console.log("testDisplayOnDotPad 함수가 정의되어 있지 않습니다.");
+          }
       }
+  }
 
       //F1,2,3,4
       else if (intvalue[6] == 50) {
