@@ -176,7 +176,7 @@ function delay(ms) {
 }
 
 
-const icons = [
+const long = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
@@ -196,7 +196,7 @@ const icons = [
 ]
 
 
-const clothes = [
+const short = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -221,7 +221,7 @@ export async function testDisplayOnDotPad(result, position) {
   console.log('position', position);
   var F1 = [];
   var array2 = merge(19, 40, result, pad_test());  
-  array2 = merge(5,5,clothes ,array2);
+  array2 = merge(5,5,short ,array2);
   console.log('arraywithicon', array2);
   array2 = merge(27, 8, position, array2);
   console.log('arrayWithPosition', array2);
