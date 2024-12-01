@@ -116,7 +116,7 @@ function playTTS(text) {
 
 // 키보드 이벤트 처리
 document.addEventListener("keydown", async (event) => {
-    const pk = 1; // PK 값 설정 (요구 사항에 따라 동적으로 변경 가능)
+    pk = product.pk; // PK 값 설정 (요구 사항에 따라 동적으로 변경 가능)
 
     if (event.key === "R" || event.key === "r") {
         console.log("키보드 R 입력: 이미지 분석 시작");
