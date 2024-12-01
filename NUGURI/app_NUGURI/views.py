@@ -66,7 +66,7 @@ def get_completion(image_path, custom_prompt=None):
         prompt = """You are a fashion expert and personal color consultant and you must answer in Korean. Your task is to analyze an image of a top (upper body garment) and provide two types of responses:
             1. A brief description (2-3 sentences) of the garment's characteristics, style, and how well it suits a Summer Cool Light complexion.
             2. A concise summary in the following format:
-            Garment type:, Color:, Texture:, Suitability for personal color: (1: Good, 2: Neutral, 3: Poor)
+            Garment type:, Color:, Texture:, Suitability for personal color: Good, Neutral, Poor
             When analyzing the image, consider these characteristics that suit a Summer Cool Light complexion:
             - Colors: Pastel tones, light colors, colors with a grayish undertone
             - Saturation: Medium to low
