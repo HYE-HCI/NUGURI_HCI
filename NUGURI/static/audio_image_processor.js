@@ -114,43 +114,47 @@ function playTTS(text) {
     });
 }
 
-// 키보드 이벤트 처리
-document.addEventListener("keydown", async (event) => {
-    pk = product.pk; // PK 값 설정 (요구 사항에 따라 동적으로 변경 가능)
+document.addEventListener('DOMContentLoaded', () => {
+    const pk = parseInt(productPk, 10); // PK 값 설정 (요구 사항에 따라 동적으로 변경 가능)
+    console.log("현재 제품의 PK는:", pk);
 
-    if (event.key === "R" || event.key === "r") {
-        console.log("키보드 R 입력: 이미지 분석 시작");
-        await analyzeImage(pk);
-    } else if (event.key === "T" || event.key === "t") {
-        if (!isRecording) {
-            console.log("키보드 T 입력: 녹음 시작");
-            try {
-                audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(audioStream, { mimeType: "audio/webm;codecs=opus" });
-                audioChunks = [];
+    // 키보드 이벤트 처리
+    document.addEventListener("keydown", async (event) => {
+        console.log("현재 제품의 PK는:", pk);
+        if (event.key === "R" || event.key === "r") {
+            console.log("키보드 R 입력: 이미지 분석 시작");
+            await analyzeImage(pk);
+        } else if (event.key === "T" || event.key === "t") {
+            if (!isRecording) {
+                console.log("키보드 T 입력: 녹음 시작");
+                try {
+                    audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(audioStream, { mimeType: "audio/webm;codecs=opus" });
+                    audioChunks = [];
 
-                mediaRecorder.ondataavailable = (event) => {
-                    if (event.data.size > 0) {
-                        audioChunks.push(event.data);
-                    }
-                };
+                    mediaRecorder.ondataavailable = (event) => {
+                        if (event.data.size > 0) {
+                            audioChunks.push(event.data);
+                        }
+                    };
 
-                mediaRecorder.onstop = async () => {
-                    console.log("녹음 중지");
-                    audioStream.getTracks().forEach(track => track.stop());
-                    await processAudioWithImage(pk);
-                };
+                    mediaRecorder.onstop = async () => {
+                        console.log("녹음 중지");
+                        audioStream.getTracks().forEach(track => track.stop());
+                        await processAudioWithImage(pk);
+                    };
 
-                mediaRecorder.start();
-                isRecording = true;
-            } catch (error) {
-                console.error("마이크 접근 오류:", error);
-                alert("마이크 접근에 실패했습니다.");
+                    mediaRecorder.start();
+                    isRecording = true;
+                } catch (error) {
+                    console.error("마이크 접근 오류:", error);
+                    alert("마이크 접근에 실패했습니다.");
+                }
+            } else {
+                console.log("키보드 T 입력: 녹음 중지");
+                mediaRecorder.stop();
+                isRecording = false;
             }
-        } else {
-            console.log("키보드 T 입력: 녹음 중지");
-            mediaRecorder.stop();
-            isRecording = false;
         }
-    }
+    });
 });

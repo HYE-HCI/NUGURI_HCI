@@ -237,6 +237,10 @@
     <script type="module" src="{% static 'main.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'audio_image_processor.js' %}"></script>
+    <script type="text/javascript">
+        const productPk = "{{ product.pk }}";
+        console.log(productPk);  // JavaScript에서 `product.pk` 값 확인
+    </script>
 </body>
 
 
