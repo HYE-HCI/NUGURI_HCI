@@ -64,7 +64,29 @@ def edge_detection_with_mask(image_path, mask, output_size=(40, 40)):
     
     mean_bgr = [103.939, 116.779, 123.68]
 
-    # 이미지 및 마스크 사분할
+    # 전체 이미지에 대한 처리
+    full_image_resized = image.astype(np.float32)
+    full_image_resized -= mean_bgr
+    full_image_resized = full_image_resized.transpose((2, 0, 1))  # HWC -> CHW
+    full_image_resized = np.expand_dims(full_image_resized, axis=0)  # 배치 차원 추가
+
+    inputs = {edge_session.get_inputs()[0].name: full_image_resized}
+    preds = edge_session.run(None, inputs)
+
+    full_edge_map = 1 / (1 + np.exp(-preds[0][0, 0, ...]))  
+    full_edge_map = (full_edge_map * 255).astype(np.uint8)
+
+    masked_full_edge_map = cv2.bitwise_and(full_edge_map, full_edge_map, mask=mask)
+
+    # 팽창 및 대비 강화
+    full_dilated_edge_map = apply_dilation(masked_full_edge_map, kernel_size=7, iterations=2)
+    full_contrasted_edge_map = enhance_contrast(full_dilated_edge_map, contrast_factor=2.0)
+
+    # 이진화 및 크기 조정
+    _, full_binary_edge_map = cv2.threshold(full_contrasted_edge_map, 80, 1, cv2.THRESH_BINARY)
+    resized_full_binary_edge_map = cv2.resize(full_binary_edge_map, output_size, interpolation=cv2.INTER_NEAREST)
+
+    # 사분할 처리
     half_h, half_w = 512 // 2, 512 // 2
     image_quarters = [
         image[0:half_h, 0:half_w],       # 왼쪽 상단
@@ -80,9 +102,7 @@ def edge_detection_with_mask(image_path, mask, output_size=(40, 40)):
     ]
 
     resized_binary_edge_maps = []
-    # 각 사분할에 대해 엣지 검출 수행
-    for i, (img_part, mask_part) in enumerate(zip(image_quarters, mask_quarters)):
-        # 이미지 전처리
+    for img_part, mask_part in zip(image_quarters, mask_quarters):
         img_part_resized = cv2.resize(img_part, (512, 512)).astype(np.float32)
         img_part_resized -= mean_bgr
         img_part_resized = img_part_resized.transpose((2, 0, 1))  # HWC -> CHW
@@ -91,25 +111,21 @@ def edge_detection_with_mask(image_path, mask, output_size=(40, 40)):
         inputs = {edge_session.get_inputs()[0].name: img_part_resized}
         preds = edge_session.run(None, inputs)
 
-        # Edge Map 생성
         edge_map = 1 / (1 + np.exp(-preds[0][0, 0, ...]))  
         edge_map = (edge_map * 255).astype(np.uint8)
 
         mask_part_resized = cv2.resize(mask_part, (512, 512), interpolation=cv2.INTER_NEAREST)
         masked_edge_map = cv2.bitwise_and(edge_map, edge_map, mask=mask_part_resized)
 
-        # 팽창 적용
         dilated_edge_map = apply_dilation(masked_edge_map, kernel_size=7, iterations=2)
-
-        # 대비 강화
         contrasted_edge_map = enhance_contrast(dilated_edge_map, contrast_factor=2.0)
 
-        # 이진화
         _, binary_edge_map = cv2.threshold(contrasted_edge_map, 80, 1, cv2.THRESH_BINARY)
-
-        # 크기 조정
         resized_binary_edge_map = cv2.resize(binary_edge_map, output_size, interpolation=cv2.INTER_NEAREST)
-        resized_binary_edge_maps.append(resized_binary_edge_map.tolist())  # JSON 호환 형식으로 변환
+        resized_binary_edge_maps.append(resized_binary_edge_map.tolist())
+
+    # 전체 배열을 리스트의 첫 번째 요소로 추가
+    resized_binary_edge_maps.insert(0, resized_full_binary_edge_map.tolist())
 
     return resized_binary_edge_maps
 
@@ -121,12 +137,3 @@ def process_image(image_path):
     binary_arrays = edge_detection_with_mask(image_path, mask)
     
     return binary_arrays
-
-# #테스트 실행
-# image_path = "C:\\Users\\user\\Desktop\\NUGURI_HCI\\NUGURI\\media\\products\\image 2.jpg"
-# binary_arrays = process_image(image_path)
-
-# # 예시로 결과 출력 ... 
-# for i, binary_array in enumerate(binary_arrays):
-#     print(f"2D 이진 배열 {i+1}:")
-#     print(binary_array)
