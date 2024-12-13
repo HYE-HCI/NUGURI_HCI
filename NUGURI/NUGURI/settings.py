@@ -128,6 +128,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+API_KEY_PATH = os.path.join(BASE_DIR, 'api_key.txt')
+# OpenAI API 키 로드
+try:
+    with open(API_KEY_PATH, 'r') as key_file:
+        OPENAI_API_KEY = key_file.read().strip()
+except FileNotFoundError:
+    OPENAI_API_KEY = None
+    print("API 키 파일(api_key.txt)을 찾을 수 없습니다.")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
