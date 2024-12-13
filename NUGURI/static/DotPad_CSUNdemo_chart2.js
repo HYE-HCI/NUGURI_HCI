@@ -175,6 +175,7 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
 const long = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -212,7 +213,6 @@ const short = [
   [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
   [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
  ]
->>>>>>> release
 
 
 
