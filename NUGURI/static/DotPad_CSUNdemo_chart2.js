@@ -170,31 +170,13 @@ function merge(x, y, icon_li, li_dot) {
 }
 
 
-//json으로 이루어진 음성파일 실행 함수
-async function loadAndPlayAudio(jsonFilePath) {
-  try {
-    const response = await fetch(jsonFilePath);
-    const data = await response.json();
-
-    // Base64 인코딩된 오디오 데이터를 추출합니다.
-    const base64Audio = data.audio_base64;
-
-    // 오디오 객체를 생성하고 src를 설정합니다.
-    const audio = new Audio('data:audio/mp3;base64,' + base64Audio);
-
-    // 오디오를 재생합니다.
-    audio.play();
-  } catch (error) {
-    console.error('Failed to load or play audio:', error);
-  }
-}
-
 //지연 함수
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 
+<<<<<<< HEAD
 //닷패드의 리프래쉬 시간을 고려한 지연함수
 function performGattOperation() {
   return new Promise((resolve, reject) => {
@@ -651,6 +633,45 @@ async function jsonread(json_name) {
 // [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
 // [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0], 
 // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+=======
+const long = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0],
+  [0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+  [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+  [1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+
+const short = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0],
+  [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+ ]
+>>>>>>> release
 
 
 
@@ -659,9 +680,14 @@ export async function testDisplayOnDotPad(result, position) {
   console.log('position', position);
   var F1 = [];
   var array2 = merge(19, 40, result, pad_test());  
+<<<<<<< HEAD
   // array2 = merge(5,5,icons ,array2);
   console.log('arraywithicon', array2);
   array2 = merge(27, 5, position, array2);
+=======
+  array2 = merge(5, 5, short ,array2);
+  array2 = merge(27, 8, position, array2);
+>>>>>>> release
   console.log('arrayWithPosition', array2);
   F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(array2));
   myDotPad.send(F1[0]);
@@ -669,245 +695,7 @@ export async function testDisplayOnDotPad(result, position) {
 
 window.testDisplayOnDotPad = testDisplayOnDotPad;
 
-async function onS6ButtonClick() {
-  
-  const odj = await fetch("./static/woonk.json");
-  const woonklocation = await fetch('/static/woonklocation.json'); // 좌표를 받아옴
-  const speakerlocation = await fetch('/static/speaker.json');
 
-  // 가로 60 세로 40
-  const odjData = await odj.json();
-  const woonklocation_ = await woonklocation.json();
-  const speakerlocation_ = await speakerlocation.json();
-  myDotPad.tutorial = 1;
-
-  var F1 = [];
-  var F1_sound = ['웅크test.mp3'];
-  
-  const speaker = speakerlocation_[0];
-  const speakerItem = woonklocation_.find(item=>item[0]=== speaker);
-  // const woonkItem = woonklocation_.find(item=>item[0]=== "웅크");
-  // const jabiItem = woonklocation_.find(item=>item[0]=== "자비");
-
-  var result_speaker;
-  var result1;
-  var result;
-
-  result_speaker = merge(36, speakerItem[1], odjData[1][1], pad_test()); //Y좌표(고정), 캐릭터의 X좌표, 말풍선, 6040배열 - 화자말풍선
-  result1 = result_speaker
-
-  // for (let j = 0; j < woonklocation_.length; j++){
-  //   const item_ = woonklocation_[j];
-  //   const charName_ = item_[0];
-  //   const x_ = item_[1];
-  //   if (charName_ == speakerItem[0]){
-  //     result1 = result1;
-  //   } else {
-  //     result1 = merge(37, x_, odjData[2][1], result1);
-  //   }
-  // }
-
-
-
-  result = result1; // result초기값(말풍선이 들어있는 배열)
-
-  for (let i = 0; i < woonklocation_.length; i++){
-    const item = woonklocation_[i]; //캐릭터 위치 배열[캐릭터이름, x, y]
-    const charName = item[0]; //캐릭터이름
-    const x = item[1]; //캐릭터 x좌표
-    const y = item[2]; //캐릭터 y좌표
-    const charOdj = odjData.find(item=>item[0]=== charName);
-
-    result = merge(y, x, charOdj[1], result);
-  }
-  F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(result));
-
-  // result = [];
-  // result = merge(woonkItem[1], woonkItem[2], odjData[1][1], pad_test());
-  // F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(result));
-
-  // result = [];
-  // result = merge(jabiItem[1], jabiItem[2], odjData[5][1], pad_test());
-  // F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(result));
-
-
-  //myDotPad.send(F1[0]);
-  //await performGattOperation();
-  //playAudio(F1_sound[0]);
-
-  let ok = myDotPad.tutorial_ind - 1;
-  
-  
-  if (myDotPad.tutorial_state =='F1') {
-    myDotPad.tutorial_ind = 0;
-    myDotPad.send(F1[myDotPad.tutorial_ind]);
-    ok = myDotPad.tutorial_ind;
-    playAudio("/static/test/" + F1_sound[myDotPad.tutorial_ind]);
-    await performGattOperation();
-    playAudio('/static/tts/touch.mp3');
-  } 
-  // 화살표버튼 눌렀을 때  
-  else if (myDotPad.test_state == 'F1' && ok != myDotPad.tutorial_ind){
-    ok = myDotPad.test_ind;
-    myDotPad.send(F1[myDotPad.tutorial_ind]);
-    playAudio('/static/test/' + F1_sound[myDotPad.tutorial_ind]);
-    await performGattOperation();
-    playAudio('/static/tts/touch.mp3');
-  }
-
-  //음성 버튼을 눌렀을 때
-  else if (myDotPad.send_sound == 1) {
-
-    const audioElements = document.querySelectorAll('audio');
-    audioElements.forEach(audio => audio.pause());
-
-    if (myDotPad.tutorial_state == 'F1') {
-      playAudio('/static/test/' + F1_sound[myDotPad.tutorial_ind]);
-
-    }
-    myDotPad.send_sound = 0;
-  }
-  
-}
-
-
-
-function num() {
-  const num = [
-    [0, 1],
-    [0, 1],
-    [1, 1],
-    [0, 0]
-  ]
-
-  const r_num = hexa("0111") + hexa("0100");
-
-  return r_num;
-}
-function num_() {
-  const num = [
-    [0, 0],
-    [0, 0],
-    [1, 1],
-    [0, 0]
-  ]
-  const r_num = hexa("0100") + hexa("0100");
-
-  return r_num;
-}
-function num0() {
-  const num = [
-    [0, 1],
-    [1, 1],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0011") + hexa("0010");
-
-  return r_num;
-}
-function num1() {
-  const num1 = [
-    [1, 0],
-    [0, 0],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0000") + hexa("0001");
-
-  return r_num;
-}
-function num2() {
-  const num = [
-    [1, 0],
-    [1, 0],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0000") + hexa("0011");
-
-  return r_num;
-}
-function num3() {
-  const num = [
-    [1, 1],
-    [0, 0],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0001") + hexa("0001");
-
-  return r_num;
-}
-function num4() {
-  const num = [
-    [1, 1],
-    [0, 1],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0011") + hexa("0001");
-
-  return r_num;
-}
-function num5() {
-  const num = [
-    [1, 0],
-    [0, 1],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0010") + hexa("0001");
-
-  return r_num;
-}
-function num6() {
-  const num = [
-    [1, 1],
-    [1, 0],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0001") + hexa("0011");
-
-  return r_num;
-}
-function num7() {
-  const num = [
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0010") + hexa("0011");
-
-  return r_num;
-}
-function num8() {
-  const num = [
-    [1, 0],
-    [1, 1],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0011") + hexa("0011");
-
-  return r_num;
-}
-function num9() {
-  const num = [
-    [0, 1],
-    [1, 0],
-    [0, 0],
-    [0, 0]
-  ]
-  const r_num = hexa("0001") + hexa("0010");
-
-  return r_num;
-}
-
-
-//원래 obj.json에 있어야하지만 값이 복사가 되어 따로 사용함. 깊은 복사는 성능 느리다 하여 추가
 function pad_test() { 
 
   const pad_test = [
@@ -953,195 +741,5 @@ function pad_test() {
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
   ]
 
-
-
   return pad_test;
-}
-
-// .mp3, .wav 등 음성파일 실행 함수
-function playAudio(filePath) {
-  const audioElement = document.createElement('audio');
-  audioElement.src = filePath;
-
-  audioElement.addEventListener('canplaythrough', () => {
-    audioElement.play();
-  });
-
-
-
-  audioElement.addEventListener('ended', () => {
-    audioElement.remove();
-  });
-
-  document.body.appendChild(audioElement);
-}
-
-// 삭제했던 부분...
-// 음성파일이 저장 된 폴더를 읽어서 json에 목록을 저장하는 file.py를 실행하여 필요한 데이터만 추출
-async function sound_tar1() {
-
-  const response = await fetch('/run-python-script', { method: 'POST' });
-  const data = await response.json();
-
-  const audio_ = await fetch('/static/textlist.json'); 
-  const audio_list = await audio_.json();
-  console.log(audio_list);
-
-  var result = [];
-
-  for (var i = 0; i < audio_list.length; i++) {
-    var filename = audio_list[i];
-    var match = filename.match(/information(\d+)_tts\.json/);
-    if (match && match[1]) {
-      var time = parseInt(match[1], 10) * 5; // 기본적으로 10진수로 파싱합니다.
-      result.push([time, filename]);
-
-    }
-  }
-
-  console.log(result);
-  return result;
-}
-
-
-//튜토리얼이 여러번 눌렸을 때를 대비한 변수
-var tutorialnum = 0;
-
-//튜토리얼 진행 함수
-async function onS4ButtonClick() {
-   var tutorial_current = tutorialnum + 1;
-   const odj = await fetch("/static/obj.json");
-   // const odj = await fetch("/static/webtoon.json"); 이렇게 해도 패드,소리 둘 다 X
-
-  const odjData = await odj.json();
-  const audioElements = document.querySelectorAll('audio');
-  audioElements.forEach(audio => audio.pause());
-
-
-  //튜토리얼 진행을 위한 데이터 저장
-  myDotPad.tutorial = 1;
-  myDotPad.target = 0;
-  var F1 = [];
-  var F2 = [];
-  var F1_sound = ['F1_1.mp3', 'F1_4.mp3', 'F1_3.mp3', 'F1_2.mp3'];
-  var F2_sound = ['F2_1.mp3', 'F2_2.mp3', 'F2_3.mp3', 'F2_4.mp3', 'F2_5.wav', 'F2_6.wav', 'F2_7.wav', 'F2_8.wav', 'F2_9.wav'];
-
-  console.log(odjData);
-
-  var result;
-  result = merge(20, 30, odjData[0][1], pad_test());
-  //myDotPad.send("0000000000000000000000000000000000000000"+ trans_hex_pad(result));
-  F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(result));
-  result = [];
-
-  result = merge(20, 30, odjData[1][1], pad_test());
-  F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(result));
-  result = [];
-  result = merge(20, 30, odjData[2][1], pad_test());
-  F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(result));
-  result = [];
-  result = merge(20, 30, odjData[3][1], pad_test());
-  F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(result));
-  result = [];
-
-  F2.push("0000000000000000000000000000000000000000" + trans_hex_pad(odjData[5][1]));
-  F2.push("0000000000000000000000000000000000000000" + trans_hex_pad(odjData[6][1]));
-  F2.push("0000000000000000000000000000000000000000" + trans_hex_pad(odjData[7][1]));
-  F2.push("0000000000000000000000000000000000000000" + trans_hex_pad(odjData[9][1]));
-
-  F2.push(odjData[11][1] + trans_hex_pad(pad_test()));
-  F2.push(odjData[12][1] + trans_hex_pad(pad_test()));
-  F2.push(odjData[13][1] + trans_hex_pad(pad_test()));
-  F2.push(odjData[14][1] + trans_hex_pad(pad_test()));
-  F2.push(odjData[15][1] + trans_hex_pad(pad_test()));
-
-  let ok = myDotPad.tutorial_ind - 1;
-  let ok_state = myDotPad.tutorial_state;
- 
-
-  await new Promise(resolve => setTimeout(resolve, 2500)); // 버튼이 연속으로 눌렸을 때 마지막 호출만 실행하기 위한 지연
-  tutorialnum = tutorial_current;
-
-  //튜토리얼 외에 다른 버튼이 눌릴 때까지 반복
-  while (myDotPad.tutorial == 1 && tutorial_current == tutorialnum) {
-    console.log("딜레이");
-    await delay(2000);
-
-    //튜토리얼 변경 버튼을 눌렀을 때
-    if (ok_state != myDotPad.tutorial_state && myDotPad.tutorial_state == "F1") {
-      myDotPad.tutorial_ind = 0;
-      ok_state = myDotPad.tutorial_state;
-      myDotPad.send(F1[myDotPad.tutorial_ind]);
-      ok = myDotPad.tutorial_ind;
-      playAudio("/static/tutorial/" + F1_sound[myDotPad.tutorial_ind]);
-      console.log(myDotPad.send_sound);
-      await performGattOperation();
-      playAudio("/static/tts/touch.mp3");
-    }
-    else if (ok_state != myDotPad.tutorial_state && myDotPad.tutorial_state == "F2") {
-      myDotPad.tutorial_ind = 0;
-      ok_state = myDotPad.tutorial_state;
-      myDotPad.send(F2[myDotPad.tutorial_ind]);
-      ok = myDotPad.tutorial_ind;
-      playAudio("/static/tutorial/" + F2_sound[myDotPad.tutorial_ind]);
-
-      console.log(myDotPad.send_sound);
-      console.log('myDotPad.tutorial_state', myDotPad.tutorial_state);
-      console.log('myDotPad.tutorial_ind', myDotPad.tutorial_ind);
-      await performGattOperation();
-      playAudio("/static/tts/touch.mp3");
-      
-    }
-    //화살표 버튼을 눌렀을 때
-    else if (myDotPad.tutorial_state == "F1" && ok != myDotPad.tutorial_ind) {
-      ok = myDotPad.tutorial_ind;
-      myDotPad.send(F1[myDotPad.tutorial_ind]);
-      playAudio("/static/tutorial/" + F1_sound[myDotPad.tutorial_ind]);
-      await performGattOperation();
-
-     
-      playAudio("/static/tts/touch.mp3");
-    }
-    else if (myDotPad.tutorial_state == "F2" && ok != myDotPad.tutorial_ind) {
-      ok = myDotPad.tutorial_ind;
-      myDotPad.send(F2[myDotPad.tutorial_ind]);
-      playAudio("/static/tutorial/" + F2_sound[myDotPad.tutorial_ind]);
-      await performGattOperation();
-      console.log(myDotPad.send_sound);
-      playAudio("/static/tts/touch.mp3");
-      
-    }
-    //새로고침 버튼을 눌렀을 때
-    else if (myDotPad.resend == 1) {
-      if (myDotPad.tutorial_state == "F1") {
-        myDotPad.send(F1[myDotPad.tutorial_ind]);
-        await performGattOperation();
-        playAudio("/static/tts/touch.mp3");
-        myDotPad.resend = 0;
-      } else if (myDotPad.tutorial_state == "F2") {
-        myDotPad.send(F2[myDotPad.tutorial_ind]);
-        await performGattOperation();
-        playAudio("/static/tts/touch.mp3");
-        console.log(myDotPad.send_sound);
-        myDotPad.resend = 0;
-      }
-
-    }
-    //음성 버튼을 눌렀을 때
-    else if (myDotPad.send_sound == 1) {
-
-      const audioElements = document.querySelectorAll('audio');
-      audioElements.forEach(audio => audio.pause());
-
-      if (myDotPad.tutorial_state == "F1") {
-        playAudio("/static/tutorial/" + F1_sound[myDotPad.tutorial_ind]);
-      } else if (myDotPad.tutorial_state == "F2") {
-        playAudio("/static/tutorial/" + F2_sound[myDotPad.tutorial_ind]);
-      }
-
-      myDotPad.send_sound = 0;
-    }
-  }
-
-
 }
