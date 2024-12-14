@@ -1,26 +1,26 @@
-import { onConnectButtonClick, onDisconnectButtonClick,testDisplayOnDotPad} from "./DotPad_CSUNdemo_chart2.js";
+import { testDisplayOnDotPad} from "./DotPad_CSUNdemo_chart2.js";
 window.binaryArrays = [];
 window.positions =[
     [
-        "전체",
-        [
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-          ]
-    ]
+       "전체",
+       [
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+      ]
+    ],
     [
       "왼쪽 상단",
       [
@@ -60,7 +60,7 @@ window.positions =[
         [1,0,0,0,0,0,0,1,0,0,0,0,0,0,1],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
       ]
-    ],   
+     ],   
      [
         "왼쪽 하단",
         [
@@ -102,6 +102,7 @@ window.positions =[
       ]
     ]
   ]
+
 document.addEventListener("DOMContentLoaded", function () {
     const processImageBtn = document.getElementById("processImageBtn");
 
@@ -130,9 +131,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (response.ok) {
                     const result = await response.json(); // JSON 데이터를 받아옴
+                    console.log('Server response:', result);  // 서버 응답 전체를 확인
+                    console.log('Binary arrays:', result.binary_arrays);  
                     window.binaryArrays = result.binary_arrays;
+                    console.log('First binary array:', window.binaryArrays[0]);  // 첫 번째 배열 확인
+                    console.log('Position data:', window.positions[0][1]);  
                     testDisplayOnDotPad(window.binaryArrays[0],window.positions[0][1]);
-
                 } else {
                     resultDiv.innerHTML = "<p>이미지 처리를 실패했습니다.</p>";
                     console.error("Response error:", await response.text()); // 디버깅용 출력

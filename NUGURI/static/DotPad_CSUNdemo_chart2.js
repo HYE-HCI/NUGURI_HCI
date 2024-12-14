@@ -1,8 +1,6 @@
 import { DotPad } from "./DotPad_Class.js";
 let myDotPad = new DotPad();
 
-
-
 document.getElementById("connectbutton")?.addEventListener("click", onConnectButtonClick);
 document.getElementById("disconnectbutton")?.addEventListener("click", onDisconnectButtonClick);
 
@@ -175,54 +173,12 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
-const long = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0],
-  [0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
-  [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-  [1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1],
-  [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-]
-
-
-const short = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0],
-  [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0],
-  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
- ]
-
-
-
 export async function testDisplayOnDotPad(result, position) {
   console.log('result', result);
   console.log('position', position);
   var F1 = [];
   var array2 = merge(19, 40, result, pad_test());  
-  array2 = merge(5, 5, short ,array2);
-  array2 = merge(27, 8, position, array2);
+  array2 = merge(19, 8, position, array2);
   console.log('arrayWithPosition', array2);
   F1.push("0000000000000000000000000000000000000000" + trans_hex_pad(array2));
   myDotPad.send(F1[0]);
