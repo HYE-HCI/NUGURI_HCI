@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import sys
+import onnxruntime as ort
+import numpy as np
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
@@ -33,6 +36,30 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+segmentation_model_path = os.path.join(BASE_DIR, "clothes_seg.onnx")
+edge_detection_model_path = os.path.join(BASE_DIR, "edge_detection_fq.onnx")
+print(segmentation_model_path)
+segmentation_session = ort.InferenceSession(segmentation_model_path, providers=['CUDAExecutionProvider'])
+
+image = np.random.randn(3, 768, 768).astype(np.float32)
+input_image = np.expand_dims(image, axis=0)  # 배치 차원 추가
+inputs = {segmentation_session.get_inputs()[0].name: input_image}
+segmentation_session.run(None, inputs)
+
+
+image = np.random.randn(3, 512, 512).astype(np.float32)
+input_image = np.expand_dims(image, axis=0)  # 배치 차원 추가
+edge_session = ort.InferenceSession(edge_detection_model_path, providers=['CUDAExecutionProvider'])
+inputs = {edge_session.get_inputs()[0].name: input_image}
+edge_session.run(None, inputs)
+
+
+
+
+MODEL = {
+    "segmentation": segmentation_session,
+    "edge_detection": edge_session
+}
 
 # Application definition
 

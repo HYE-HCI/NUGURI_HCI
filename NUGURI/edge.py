@@ -1,19 +1,13 @@
-import onnxruntime as ort
 import numpy as np
 import cv2
 import os
-
-base_dir = os.path.dirname(os.path.abspath(__file__))
-
-segmentation_model_path = os.path.join(base_dir, "clothes_seg.onnx")
-edge_detection_model_path = os.path.join(base_dir, "edge_detection.onnx")
-
-segmentation_session = ort.InferenceSession(segmentation_model_path)
-edge_session = ort.InferenceSession(edge_detection_model_path)
+from NUGURI.settings import MODEL
 
 
 def segment_image(image_path):
     image = cv2.imread(image_path)
+
+    segmentation_session = MODEL['segmentation']
     if image is None:
         raise FileNotFoundError(f"이미지를 불러올 수 없습니다: {image_path}")
     
@@ -37,8 +31,9 @@ def segment_image(image_path):
 
     kernel = np.ones((7, 7), np.uint8)
     mask = cv2.dilate(mask, kernel, iterations=2)
-    
     return mask
+
+
 def apply_dilation(image, kernel_size=7, iterations=2):
 
     kernel = np.ones((kernel_size, kernel_size), np.uint8)
@@ -55,6 +50,9 @@ def enhance_contrast(image, contrast_factor=2.0):
     return enhanced.astype(np.uint8)
 
 def edge_detection_with_mask(image_path, mask, output_size=(40, 40)):
+    edge_session = MODEL['edge_detection']
+
+
     image = cv2.imread(image_path, cv2.IMREAD_COLOR)
     if image is None:
         raise FileNotFoundError(f"이미지를 불러올 수 없습니다: {image_path}")
