@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_NUGURI', 
     'rest_framework', 
+    # "sslserver"
 ]
 
 MIDDLEWARE = [
