@@ -26,7 +26,7 @@ class Command(BaseCommand):
 
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-        url = 'https://www.musinsa.com/products/2705768'  # 테스트 URL
+        url = 'https://www.musinsa.com/products/3593772'  # 테스트 URL
         driver.get(url)
 
         # 제품명 추출 (CSS Selector)

@@ -38,15 +38,15 @@
             flex: 1; /* 가운데 정렬 */
             white-space: normal;
         }
+
         /* 목록으로 돌아가기 버튼 */
         .header .top-left {
             position: relative;
             left: 8px;
             top: 10px;
         }
-
         .top-left img {
-            width: 140px; /* 버튼 크기 */
+            width: 200px; /* 버튼 크기 */
             height: auto;
             cursor: pointer;
             transition: transform 0.2s;
@@ -54,17 +54,12 @@
         .top-left img:hover {
             transform: scale(1.1); /* 확대 효과 */
         }
-
         /* 닷패드 연동버튼 */
         .header .dotpad-button {
-            /* display: flex; */
             position: relative;
             top: 20px;
             right: 20px;
             margin-left: auto;
-            /* width: 180px;
-            align-items: center;
-            justify-content: center; */
         }
         .dotpad-button img {
             height: auto;
@@ -75,7 +70,6 @@
         .dotpad-button img:hover {
             transform: scale(1.1); /* 확대 효과 */
         }
-
         /* 제품 이미지 */
         .product-image {
             margin: 20px 0;
@@ -90,18 +84,16 @@
             text-align: center;
             margin: 20px;
         }
-
         /* 하단 버튼 */
         .bottom-center {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 40px;
-            margin-top: auto;
+            margin-top: 20px;
         }
-
         .bottom-center img {
-            width: 200px; /* 버튼 크기 */
+            width: 250px; /* 버튼 크기 */
             height: auto;
             cursor: pointer;
             transition: transform 0.2s;
@@ -179,7 +171,44 @@
         <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
 
         <!-- 제품 설명 -->
-        <p class="description">{{ product.description|linebreaks }}</p>
+        <style>
+            .fit-info-table {
+                width: 100%;
+                max-width: 600px;
+                border-collapse: collapse;
+                margin: 20px auto;
+            }
+            .fit-info-table th, .fit-info-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+            .fit-info-table th {
+                background-color: #f5f5f5;
+            }
+        </style>
+        <div class="description">
+            {% if product.description %}
+                <table class="fit-info-table">
+                    <tr>
+                        <th>핏</th>
+                        <th>촉감</th>
+                        <th>신축성</th>
+                        <th>비침</th>
+                        <th>두께</th>
+                        <th>계절</th>
+                    </tr>
+                    <tr>
+                        <td>{{ product.description.fit_info.핏|join:", " }}</td>
+                        <td>{{ product.description.fit_info.촉감|join:", " }}</td>
+                        <td>{{ product.description.fit_info.신축성|join:", " }}</td>
+                        <td>{{ product.description.fit_info.비침|join:", " }}</td>
+                        <td>{{ product.description.fit_info.두께|join:", " }}</td>
+                        <td>{{ product.description.fit_info.계절|join:", " }}</td>
+                    </tr>
+                </table>
+            {% endif %}
+        </div>
 
         <!-- 하단 버튼 섹션 -->
         <div class="bottom-center">

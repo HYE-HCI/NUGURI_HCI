@@ -14,19 +14,25 @@ from django.core.files.base import ContentFile
 from pathlib import Path
 import base64
 
-# OpenAI API 키 설정
-if hasattr(settings, 'OPENAI_API_KEY') and settings.OPENAI_API_KEY:
-    openai.api_key = settings.OPENAI_API_KEY
-else:
-    raise ValueError("OPENAI_API_KEY가 설정되지 않았습니다. settings.py 또는 api_key.txt를 확인하세요.")
-
 def product_list_view(request):
     products = Product.objects.all()
     return render(request, 'app_NUGURI/product_list.html', {'products': products})
 
 def product_detail_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)
+    try:
+        if product.description:
+            # description이 문자열이면 JSON으로 파싱
+            if isinstance(product.description, str):
+                product.description = json.loads(product.description)
+    except json.JSONDecodeError:
+        # JSON 파싱에 실패한 경우 원본 데이터 유지
+        pass
     return render(request, 'app_NUGURI/product_detail.html', {'product': product})
+
+# def product_detail_view(request, product_id):
+#     product = get_object_or_404(Product, id=product_id)
+#     return render(request, 'app_NUGURI/product_detail.html', {'product': product})
 
 # 이미지 처리 뷰 추가
 def process_product_image(request, product_id):
@@ -43,6 +49,12 @@ def process_product_image(request, product_id):
             return JsonResponse({"error": str(e)}, status=500)
     else:
         return JsonResponse({"error": "Invalid request method"}, status=405)
+    
+# OpenAI API 키 설정
+if hasattr(settings, 'OPENAI_API_KEY') and settings.OPENAI_API_KEY:
+    openai.api_key = settings.OPENAI_API_KEY
+else:
+    raise ValueError("OPENAI_API_KEY가 설정되지 않았습니다. settings.py 또는 api_key.txt를 확인하세요.")
     
 # Below hyunwook part
 def save_text_to_file(file_path, content):
