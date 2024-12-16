@@ -9,3 +9,10 @@ We are developing an algorithm and web platform that converts clothing images in
 | Areum Kim | | |
 | Nayoung Lee | | |
 | Hyunwook Jung | LLM | views.py, audio_image_processor.js |
+
+# Demo
+![염화수소팀 최종.pdf](https://github.com/user-attachments/files/18155083/default.pdf)
+
+![UI-Video](https://github.com/user-attachments/assets/3b1f9205-275c-4968-a3ed-7352aeb7c1de)
+
+![LLM-Video](https://github.com/user-attachments/assets/20061b7a-6307-4927-88fb-02006780e31d)
