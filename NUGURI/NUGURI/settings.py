@@ -29,7 +29,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zrs%ty+6cw7e9qmc70)t-a_18uzlxx$1kv_fyv#*2(mfs++&_6'
+SECRET_KEY_PATH = os.path.join(BASE_DIR, 'secret_key.txt')
+# OpenAI API 키 로드
+try:
+    with open(SECRET_KEY_PATH, 'r') as key_file:
+        SECRET_KEY = key_file.read().strip()
+except FileNotFoundError:
+    SECRET_KEY = None
+    print("DJANGO secret 키 파일(secret_key.txt)을 찾을 수 없습니다.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -156,6 +163,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+### Hyunwook
 API_KEY_PATH = os.path.join(BASE_DIR, 'api_key.txt')
 # OpenAI API 키 로드
 try:

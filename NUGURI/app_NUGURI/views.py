@@ -30,9 +30,7 @@ def product_detail_view(request, product_id):
         pass
     return render(request, 'app_NUGURI/product_detail.html', {'product': product})
 
-# def product_detail_view(request, product_id):
-#     product = get_object_or_404(Product, id=product_id)
-#     return render(request, 'app_NUGURI/product_detail.html', {'product': product})
+### Hyunwook
 
 # 이미지 처리 뷰 추가
 def process_product_image(request, product_id):
