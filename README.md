@@ -4,6 +4,7 @@ We are developing an algorithm and web platform that converts clothing images in
 
 # Roles
 | Name | Role | Main Part |
+|------|------|-----------|
 | Dohoon Kwak | | | 
 | Areum Kim | | |
 | Nayoung Lee | | |
