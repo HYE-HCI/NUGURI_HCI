@@ -5,7 +5,7 @@ We are developing an algorithm and web platform that converts clothing images in
 # Roles
 | Name | Role | Main Part |
 |------|------|-----------|
-| Dohoon Kwak | | | 
+| Dohoon Kwak | BackEnd | crawl_products.py, export_products.py  | 
 | Areum Kim | | |
 | Nayoung Lee | | |
 | Hyunwook Jung | LLM | views.py, audio_image_processor.js |
