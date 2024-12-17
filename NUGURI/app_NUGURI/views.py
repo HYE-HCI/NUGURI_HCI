@@ -14,6 +14,8 @@ from django.core.files.base import ContentFile
 from pathlib import Path
 import base64
 
+### Dohoon
+
 def product_list_view(request):
     products = Product.objects.all()
     return render(request, 'app_NUGURI/product_list.html', {'products': products})

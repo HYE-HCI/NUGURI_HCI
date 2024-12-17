@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from django.core import serializers
 from app_NUGURI.models import Product
 
+### Dohoon
 class Command(BaseCommand):
     help = 'Export all products to a JSON file'
 
