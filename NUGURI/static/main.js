@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
             2
           )} ms`
         );
-
+        //Areum
         if (response.ok) {
           const result = await response.json(); // JSON 데이터를 받아옴
           window.binaryArrays = result.binary_arrays;

@@ -34,7 +34,7 @@ def product_detail_view(request, product_id):
 
 ### Hyunwook
 
-# 이미지 처리 뷰 추가
+# 이미지 처리 뷰 추가 Areum
 def process_product_image(request, product_id):
     if request.method == 'POST':
         product = get_object_or_404(Product, id=product_id)
