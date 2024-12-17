@@ -17,14 +17,16 @@ We are developing an algorithm and web platform that converts clothing images in
 
 ![LLM-Video](https://github.com/user-attachments/assets/20061b7a-6307-4927-88fb-02006780e31d)
 
+
+
 # DAI3004_Project
 ## Team Members
-- 팀장 : 남서용 (컴퓨터학부, 한양대학교 ERICA)
-- 팀원 : 김다영 (인공지능학과, 한양대학교 ERICA)
-- 팀원 : 김은채 (인공지능학과, 한양대학교 ERICA)
-- 팀원 : 임은지 (인공지능학과, 한양대학교 ERICA)
+- 팀장 : 곽도훈 (인공지능학과, 한양대학교 ERICA)
+- 팀원 : 김아름 (인공지능학과, 한양대학교 ERICA)
+- 팀원 : 이나영 (인공지능학과, 한양대학교 ERICA)
+- 팀원 : 정현욱 (인공지능학과, 한양대학교 ERICA)
 ## Introduction
-이 프로젝트는 시각장애인 이용자를 위한 이미지 인식을 통해 일상생활의 불편을 덜어주는 것을 목적으로 하여, 서명란의 위치가 어디에 있는지 안내 및 오프라인 종이로 나오는 서류의 내용을 기존에 자신이 서명하려 했던 서류가 맞는지 유사율을 나타낸다.
+We are Team HCI, a group of third-year students from the Department of Artificial Intelligence at Hanyang University ERICA. We are developing an algorithm and web platform that converts clothing images into tactile information to assist visually impaired individuals with online clothing shopping. This project aims to enhance the shopping experience by enabling visually impaired users to perceive the shape and texture of clothing through tactile feedback.
 ## Contents
 0. [Folder Structure](#folder-structure)
 1. [Deelopment Setting](#development-setting)
@@ -36,38 +38,116 @@ We are developing an algorithm and web platform that converts clothing images in
 7. [Demo](#demo)
 ### Folder Structure
 ```
-DAI3004_Project
-├── LICENSE
-├── README.md
-├── app.py                  // main python file
-├── cam.py                  // operating camera python code
-├── comparison.py           // document comparison python code
-├── ocr.py                  // ocr python code
-├── ocr_capture.py          // captured image ocr python code
-├── img
-├── static
-│   ├── favicon.ico
-│   ├── file.jpg
-│   ├── images
-│   │   ├── file_A.png      // scenario A image file
-│   │   ├── file_B.png      // scenario A image file
-│   │   └── file_C.png      // scenario A image file
-│   ├── script.js           // JavaScript code needed for the web
-│   ├── style.css           // CSS code needed for the web
-│   ├── tts
-│   └── uploads
-├── templates
-│   ├── compare.html        // compare web html code
-│   ├── index.html          // main web html code
-│   └── object.html         // signature bounding box web html code
-├── text
-│   ├── A.txt               // result of scenario A ocr
-│   ├── B.txt               // result of scenario B ocr
-│   ├── C.txt               // result of scenario C ocr
-│   ├── boundingbox.txt     // coordinate of signature box
-│   ├── output.txt          // result of picture's ocr
-│   └── result.txt          // result of similarity of two documents
-└── tts
+NUGURI_HCI
+ ┣ NUGURI
+ ┃ ┣ app_NUGURI
+ ┃ ┃ ┣ management
+ ┃ ┃ ┃ ┣ commands
+ ┃ ┃ ┃ ┃ ┣ __pycache__
+ ┃ ┃ ┃ ┃ ┃ ┣ crawl_products.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┃ ┣ crawl_products.cpython-39.pyc
+ ┃ ┃ ┃ ┃ ┃ ┣ export_products.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┃ ┣ __init__.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┃ ┗ __init__.cpython-39.pyc
+ ┃ ┃ ┃ ┃ ┣ crawl_products.py
+ ┃ ┃ ┃ ┃ ┣ export_products.py
+ ┃ ┃ ┃ ┃ ┗ __init__.py
+ ┃ ┃ ┃ ┗ __init__ .py
+ ┃ ┃ ┣ migrations
+ ┃ ┃ ┃ ┣ __pycache__
+ ┃ ┃ ┃ ┃ ┣ 0001_initial.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┣ 0002_remove_product_description_url_product_description.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┣ 0003_remove_product_image_url_product_image_and_more.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┣ 0004_product_original_url.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┗ __init__.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 0001_initial.py
+ ┃ ┃ ┃ ┣ 0002_remove_product_description_url_product_description.py
+ ┃ ┃ ┃ ┣ 0003_remove_product_image_url_product_image_and_more.py
+ ┃ ┃ ┃ ┣ 0004_product_original_url.py
+ ┃ ┃ ┃ ┗ __init__.py
+ ┃ ┃ ┣ templates
+ ┃ ┃ ┃ ┗ app_NUGURI
+ ┃ ┃ ┃ ┃ ┣ product_detail.html
+ ┃ ┃ ┃ ┃ ┗ product_list.html
+ ┃ ┃ ┣ __pycache__
+ ┃ ┃ ┃ ┣ admin.cpython-312.pyc
+ ┃ ┃ ┃ ┣ apps.cpython-312.pyc
+ ┃ ┃ ┃ ┣ models.cpython-312.pyc
+ ┃ ┃ ┃ ┣ serializers.cpython-312.pyc
+ ┃ ┃ ┃ ┣ urls.cpython-312.pyc
+ ┃ ┃ ┃ ┣ views.cpython-312.pyc
+ ┃ ┃ ┃ ┗ __init__.cpython-312.pyc
+ ┃ ┃ ┣ admin.py
+ ┃ ┃ ┣ apps.py
+ ┃ ┃ ┣ models.py
+ ┃ ┃ ┣ serializers.py
+ ┃ ┃ ┣ tests.py
+ ┃ ┃ ┣ urls.py
+ ┃ ┃ ┣ views.py
+ ┃ ┃ ┗ __init__.py
+ ┃ ┣ media
+ ┃ ┃ ┣ products
+ ┃ ┃ ┃ ┣ Extra_Oversized_Hooded_Sweatshirt_Surf_Blue.jpg
+ ┃ ┃ ┃ ┗ Wool_Brush_Stripe_Knit_Blue.jpg
+ ┃ ┃ ┣ sounds
+ ┃ ┃ ┃ ┣ audio.mp3
+ ┃ ┃ ┃ ┗ speech.mp3
+ ┃ ┃ ┣ temp
+ ┃ ┃ ┃ ┣ blob
+ ┃ ┃ ┃ ┣ blob_1fKByCA
+ ┃ ┃ ┃ ┣ blob_AVCOVQ8
+ ┃ ┃ ┃ ┣ blob_DAGnBOV
+ ┃ ┃ ┃ ┣ blob_jJbLucl
+ ┃ ┃ ┃ ┣ blob_laCGb8R
+ ┃ ┃ ┃ ┣ blob_Mqqkx9X
+ ┃ ┃ ┃ ┣ blob_NiBjkB1
+ ┃ ┃ ┃ ┣ blob_NJQ5Cv8
+ ┃ ┃ ┃ ┣ blob_Pwg3DYR
+ ┃ ┃ ┃ ┣ blob_spIaiVr
+ ┃ ┃ ┃ ┗ blob_w0iyIx2
+ ┃ ┃ ┣ text
+ ┃ ┃ ┃ ┣ analyze.txt
+ ┃ ┃ ┃ ┣ qa.txt
+ ┃ ┃ ┃ ┗ stt.txt
+ ┃ ┃ ┗ uploads
+ ┃ ┃ ┃ ┗ blob
+ ┃ ┣ NUGURI
+ ┃ ┃ ┣ __pycache__
+ ┃ ┃ ┃ ┣ settings.cpython-312.pyc
+ ┃ ┃ ┃ ┣ urls.cpython-312.pyc
+ ┃ ┃ ┃ ┣ wsgi.cpython-312.pyc
+ ┃ ┃ ┃ ┗ __init__.cpython-312.pyc
+ ┃ ┃ ┣ asgi.py
+ ┃ ┃ ┣ settings.py
+ ┃ ┃ ┣ urls.py
+ ┃ ┃ ┣ wsgi.py
+ ┃ ┃ ┗ __init__.py
+ ┃ ┣ static
+ ┃ ┃ ┣ data
+ ┃ ┃ ┃ ┗ products.json
+ ┃ ┃ ┣ images
+ ┃ ┃ ┃ ┣ image_processing.jpg
+ ┃ ┃ ┃ ┣ off_button.jpg
+ ┃ ┃ ┃ ┣ on_button.jpg
+ ┃ ┃ ┃ ┣ return_button.jpg
+ ┃ ┃ ┃ ┣ shop_now_button.jpg
+ ┃ ┃ ┃ ┗ title_image.jpg
+ ┃ ┃ ┣ audio_image_processor.js
+ ┃ ┃ ┣ DotPad_Class.js
+ ┃ ┃ ┣ DotPad_CSUNdemo_chart2.js
+ ┃ ┃ ┣ jquery-3.6.0.min.js
+ ┃ ┃ ┗ main.js
+ ┃ ┣ __pycache__
+ ┃ ┃ ┗ edge.cpython-312.pyc
+ ┃ ┣ api_key.txt
+ ┃ ┣ clothes_seg.onnx
+ ┃ ┣ db.sqlite3
+ ┃ ┣ edge.py
+ ┃ ┣ edge_detection.onnx
+ ┃ ┗ manage.py
+ ┣ .gitignore
+ ┣ LICENSE
+ ┗ README.md
 ```
 ### Development Setting
 - Ubuntu 20.04
