@@ -163,4 +163,4 @@ cython_debug/
 
 *.onnx
 api_key.txt
-secret_key.txt
+secrets.json

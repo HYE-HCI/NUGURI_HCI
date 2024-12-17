@@ -15,6 +15,8 @@ import os
 import sys
 import onnxruntime as ort
 import numpy as np
+from django.core.exceptions import ImproperlyConfigured
+import os, json
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,14 +31,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY_PATH = os.path.join(BASE_DIR, 'secret_key.txt')
-# OpenAI API 키 로드
-try:
-    with open(SECRET_KEY_PATH, 'r') as key_file:
-        SECRET_KEY = key_file.read().strip()
-except FileNotFoundError:
-    SECRET_KEY = None
-    print("DJANGO secret 키 파일(secret_key.txt)을 찾을 수 없습니다.")
+# SECRET_KEY_PATH = os.path.join(BASE_DIR, 'secret_key.txt')
+# # OpenAI API 키 로드
+# try:
+#     with open(SECRET_KEY_PATH, 'r') as key_file:
+#         SECRET_KEY = key_file.read().strip()
+# except FileNotFoundError:
+#     SECRET_KEY = None
+#     print("DJANGO secret 키 파일(secret_key.txt)을 찾을 수 없습니다.")
+
+# secrets.json 파일 위치를 명시
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+# secrets.json 파일을 불러오기
+with open(secret_file) as f:
+    secrets = json.load(f)  # json.load(f)를 사용
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+# SECRET_KEY 가져오기
+SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,7 +63,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 segmentation_model_path = os.path.join(BASE_DIR, "clothes_seg.onnx")
-edge_detection_model_path = os.path.join(BASE_DIR, "edge_detection_fq.onnx")
+edge_detection_model_path = os.path.join(BASE_DIR, "edge_detection.onnx")
 print(segmentation_model_path)
 segmentation_session = ort.InferenceSession(segmentation_model_path, providers=['CUDAExecutionProvider'])
 
