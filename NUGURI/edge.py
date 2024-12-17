@@ -1,6 +1,7 @@
+## Areum
+
 import numpy as np
 import cv2
-import os
 from NUGURI.settings import MODEL
 
 

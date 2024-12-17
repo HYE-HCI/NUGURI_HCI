@@ -541,7 +541,7 @@ class DotPad {
     */
    
 
-    
+    // Areum
     //버튼 함수 매핑 
     if (intvalue[6] == 18) {
       // 화살표 왼쪽
