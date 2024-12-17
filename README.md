@@ -102,6 +102,6 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 3. 본인이 설정한 포트로 접속한다. Ex) 'http://127.0.0.1:443'
-'''
+```
 http://127.0.0.1:8000/app/products/
-'''
+```
