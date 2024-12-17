@@ -38,116 +38,116 @@ We are Team HCI, a group of third-year students from the Department of Artificia
 7. [Demo](#demo)
 ### Folder Structure
 ```
-NUGURI_HCI
- ┣ NUGURI
- ┃ ┣ app_NUGURI
- ┃ ┃ ┣ management
- ┃ ┃ ┃ ┣ commands
- ┃ ┃ ┃ ┃ ┣ __pycache__
- ┃ ┃ ┃ ┃ ┃ ┣ crawl_products.cpython-312.pyc
- ┃ ┃ ┃ ┃ ┃ ┣ crawl_products.cpython-39.pyc
- ┃ ┃ ┃ ┃ ┃ ┣ export_products.cpython-312.pyc
- ┃ ┃ ┃ ┃ ┃ ┣ __init__.cpython-312.pyc
- ┃ ┃ ┃ ┃ ┃ ┗ __init__.cpython-39.pyc
- ┃ ┃ ┃ ┃ ┣ crawl_products.py
- ┃ ┃ ┃ ┃ ┣ export_products.py
- ┃ ┃ ┃ ┃ ┗ __init__.py
- ┃ ┃ ┃ ┗ __init__ .py
- ┃ ┃ ┣ migrations
- ┃ ┃ ┃ ┣ __pycache__
- ┃ ┃ ┃ ┃ ┣ 0001_initial.cpython-312.pyc
- ┃ ┃ ┃ ┃ ┣ 0002_remove_product_description_url_product_description.cpython-312.pyc
- ┃ ┃ ┃ ┃ ┣ 0003_remove_product_image_url_product_image_and_more.cpython-312.pyc
- ┃ ┃ ┃ ┃ ┣ 0004_product_original_url.cpython-312.pyc
- ┃ ┃ ┃ ┃ ┗ __init__.cpython-312.pyc
- ┃ ┃ ┃ ┣ 0001_initial.py
- ┃ ┃ ┃ ┣ 0002_remove_product_description_url_product_description.py
- ┃ ┃ ┃ ┣ 0003_remove_product_image_url_product_image_and_more.py
- ┃ ┃ ┃ ┣ 0004_product_original_url.py
- ┃ ┃ ┃ ┗ __init__.py
- ┃ ┃ ┣ templates
- ┃ ┃ ┃ ┗ app_NUGURI
- ┃ ┃ ┃ ┃ ┣ product_detail.html
- ┃ ┃ ┃ ┃ ┗ product_list.html
- ┃ ┃ ┣ __pycache__
- ┃ ┃ ┃ ┣ admin.cpython-312.pyc
- ┃ ┃ ┃ ┣ apps.cpython-312.pyc
- ┃ ┃ ┃ ┣ models.cpython-312.pyc
- ┃ ┃ ┃ ┣ serializers.cpython-312.pyc
- ┃ ┃ ┃ ┣ urls.cpython-312.pyc
- ┃ ┃ ┃ ┣ views.cpython-312.pyc
- ┃ ┃ ┃ ┗ __init__.cpython-312.pyc
- ┃ ┃ ┣ admin.py
- ┃ ┃ ┣ apps.py
- ┃ ┃ ┣ models.py
- ┃ ┃ ┣ serializers.py
- ┃ ┃ ┣ tests.py
- ┃ ┃ ┣ urls.py
- ┃ ┃ ┣ views.py
- ┃ ┃ ┗ __init__.py
- ┃ ┣ media
- ┃ ┃ ┣ products
- ┃ ┃ ┃ ┣ Extra_Oversized_Hooded_Sweatshirt_Surf_Blue.jpg
- ┃ ┃ ┃ ┗ Wool_Brush_Stripe_Knit_Blue.jpg
- ┃ ┃ ┣ sounds
- ┃ ┃ ┃ ┣ audio.mp3
- ┃ ┃ ┃ ┗ speech.mp3
- ┃ ┃ ┣ temp
- ┃ ┃ ┃ ┣ blob
- ┃ ┃ ┃ ┣ blob_1fKByCA
- ┃ ┃ ┃ ┣ blob_AVCOVQ8
- ┃ ┃ ┃ ┣ blob_DAGnBOV
- ┃ ┃ ┃ ┣ blob_jJbLucl
- ┃ ┃ ┃ ┣ blob_laCGb8R
- ┃ ┃ ┃ ┣ blob_Mqqkx9X
- ┃ ┃ ┃ ┣ blob_NiBjkB1
- ┃ ┃ ┃ ┣ blob_NJQ5Cv8
- ┃ ┃ ┃ ┣ blob_Pwg3DYR
- ┃ ┃ ┃ ┣ blob_spIaiVr
- ┃ ┃ ┃ ┗ blob_w0iyIx2
- ┃ ┃ ┣ text
- ┃ ┃ ┃ ┣ analyze.txt
- ┃ ┃ ┃ ┣ qa.txt
- ┃ ┃ ┃ ┗ stt.txt
- ┃ ┃ ┗ uploads
- ┃ ┃ ┃ ┗ blob
- ┃ ┣ NUGURI
- ┃ ┃ ┣ __pycache__
- ┃ ┃ ┃ ┣ settings.cpython-312.pyc
- ┃ ┃ ┃ ┣ urls.cpython-312.pyc
- ┃ ┃ ┃ ┣ wsgi.cpython-312.pyc
- ┃ ┃ ┃ ┗ __init__.cpython-312.pyc
- ┃ ┃ ┣ asgi.py
- ┃ ┃ ┣ settings.py
- ┃ ┃ ┣ urls.py
- ┃ ┃ ┣ wsgi.py
- ┃ ┃ ┗ __init__.py
- ┃ ┣ static
- ┃ ┃ ┣ data
- ┃ ┃ ┃ ┗ products.json
- ┃ ┃ ┣ images
- ┃ ┃ ┃ ┣ image_processing.jpg
- ┃ ┃ ┃ ┣ off_button.jpg
- ┃ ┃ ┃ ┣ on_button.jpg
- ┃ ┃ ┃ ┣ return_button.jpg
- ┃ ┃ ┃ ┣ shop_now_button.jpg
- ┃ ┃ ┃ ┗ title_image.jpg
- ┃ ┃ ┣ audio_image_processor.js
- ┃ ┃ ┣ DotPad_Class.js
- ┃ ┃ ┣ DotPad_CSUNdemo_chart2.js
- ┃ ┃ ┣ jquery-3.6.0.min.js
- ┃ ┃ ┗ main.js
- ┃ ┣ __pycache__
- ┃ ┃ ┗ edge.cpython-312.pyc
- ┃ ┣ api_key.txt
- ┃ ┣ clothes_seg.onnx
- ┃ ┣ db.sqlite3
- ┃ ┣ edge.py
- ┃ ┣ edge_detection.onnx
- ┃ ┗ manage.py
- ┣ .gitignore
- ┣ LICENSE
- ┗ README.md
+📦NUGURI_HCI
+ ┣ 📂NUGURI
+ ┃ ┣ 📂app_NUGURI
+ ┃ ┃ ┣ 📂management
+ ┃ ┃ ┃ ┣ 📂commands
+ ┃ ┃ ┃ ┃ ┣ 📂__pycache__
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜crawl_products.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜crawl_products.cpython-39.pyc
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜export_products.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜__init__.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜__init__.cpython-39.pyc
+ ┃ ┃ ┃ ┃ ┣ 📜crawl_products.py
+ ┃ ┃ ┃ ┃ ┣ 📜export_products.py
+ ┃ ┃ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┃ ┃ ┗ 📜__init__ .py
+ ┃ ┃ ┣ 📂migrations
+ ┃ ┃ ┃ ┣ 📂__pycache__
+ ┃ ┃ ┃ ┃ ┣ 📜0001_initial.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┣ 📜0002_remove_product_description_url_product_description.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┣ 📜0003_remove_product_image_url_product_image_and_more.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┣ 📜0004_product_original_url.cpython-312.pyc
+ ┃ ┃ ┃ ┃ ┗ 📜__init__.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 📜0001_initial.py
+ ┃ ┃ ┃ ┣ 📜0002_remove_product_description_url_product_description.py
+ ┃ ┃ ┃ ┣ 📜0003_remove_product_image_url_product_image_and_more.py
+ ┃ ┃ ┃ ┣ 📜0004_product_original_url.py
+ ┃ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┃ ┣ 📂templates
+ ┃ ┃ ┃ ┗ 📂app_NUGURI
+ ┃ ┃ ┃ ┃ ┣ 📜product_detail.html
+ ┃ ┃ ┃ ┃ ┗ 📜product_list.html
+ ┃ ┃ ┣ 📂__pycache__
+ ┃ ┃ ┃ ┣ 📜admin.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 📜apps.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 📜models.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 📜serializers.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 📜urls.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 📜views.cpython-312.pyc
+ ┃ ┃ ┃ ┗ 📜__init__.cpython-312.pyc
+ ┃ ┃ ┣ 📜admin.py
+ ┃ ┃ ┣ 📜apps.py
+ ┃ ┃ ┣ 📜models.py
+ ┃ ┃ ┣ 📜serializers.py
+ ┃ ┃ ┣ 📜tests.py
+ ┃ ┃ ┣ 📜urls.py
+ ┃ ┃ ┣ 📜views.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂media
+ ┃ ┃ ┣ 📂products
+ ┃ ┃ ┃ ┣ 📜Extra_Oversized_Hooded_Sweatshirt_Surf_Blue.jpg
+ ┃ ┃ ┃ ┗ 📜Wool_Brush_Stripe_Knit_Blue.jpg
+ ┃ ┃ ┣ 📂sounds
+ ┃ ┃ ┃ ┣ 📜audio.mp3
+ ┃ ┃ ┃ ┗ 📜speech.mp3
+ ┃ ┃ ┣ 📂temp
+ ┃ ┃ ┃ ┣ 📜blob
+ ┃ ┃ ┃ ┣ 📜blob_1fKByCA
+ ┃ ┃ ┃ ┣ 📜blob_AVCOVQ8
+ ┃ ┃ ┃ ┣ 📜blob_DAGnBOV
+ ┃ ┃ ┃ ┣ 📜blob_jJbLucl
+ ┃ ┃ ┃ ┣ 📜blob_laCGb8R
+ ┃ ┃ ┃ ┣ 📜blob_Mqqkx9X
+ ┃ ┃ ┃ ┣ 📜blob_NiBjkB1
+ ┃ ┃ ┃ ┣ 📜blob_NJQ5Cv8
+ ┃ ┃ ┃ ┣ 📜blob_Pwg3DYR
+ ┃ ┃ ┃ ┣ 📜blob_spIaiVr
+ ┃ ┃ ┃ ┗ 📜blob_w0iyIx2
+ ┃ ┃ ┣ 📂text
+ ┃ ┃ ┃ ┣ 📜analyze.txt
+ ┃ ┃ ┃ ┣ 📜qa.txt
+ ┃ ┃ ┃ ┗ 📜stt.txt
+ ┃ ┃ ┗ 📂uploads
+ ┃ ┃ ┃ ┗ 📜blob
+ ┃ ┣ 📂NUGURI
+ ┃ ┃ ┣ 📂__pycache__
+ ┃ ┃ ┃ ┣ 📜settings.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 📜urls.cpython-312.pyc
+ ┃ ┃ ┃ ┣ 📜wsgi.cpython-312.pyc
+ ┃ ┃ ┃ ┗ 📜__init__.cpython-312.pyc
+ ┃ ┃ ┣ 📜asgi.py
+ ┃ ┃ ┣ 📜settings.py
+ ┃ ┃ ┣ 📜urls.py
+ ┃ ┃ ┣ 📜wsgi.py
+ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┣ 📂static
+ ┃ ┃ ┣ 📂data
+ ┃ ┃ ┃ ┗ 📜products.json
+ ┃ ┃ ┣ 📂images
+ ┃ ┃ ┃ ┣ 📜image_processing.jpg
+ ┃ ┃ ┃ ┣ 📜off_button.jpg
+ ┃ ┃ ┃ ┣ 📜on_button.jpg
+ ┃ ┃ ┃ ┣ 📜return_button.jpg
+ ┃ ┃ ┃ ┣ 📜shop_now_button.jpg
+ ┃ ┃ ┃ ┗ 📜title_image.jpg
+ ┃ ┃ ┣ 📜audio_image_processor.js
+ ┃ ┃ ┣ 📜DotPad_Class.js
+ ┃ ┃ ┣ 📜DotPad_CSUNdemo_chart2.js
+ ┃ ┃ ┣ 📜jquery-3.6.0.min.js
+ ┃ ┃ ┗ 📜main.js
+ ┃ ┣ 📂__pycache__
+ ┃ ┃ ┗ 📜edge.cpython-312.pyc
+ ┃ ┣ 📜api_key.txt
+ ┃ ┣ 📜clothes_seg.onnx
+ ┃ ┣ 📜db.sqlite3
+ ┃ ┣ 📜edge.py
+ ┃ ┣ 📜edge_detection.onnx
+ ┃ ┗ 📜manage.py
+ ┣ 📜.gitignore
+ ┣ 📜LICENSE
+ ┗ 📜README.md
 ```
 ### Development Setting
 - Ubuntu 20.04
