@@ -11,7 +11,7 @@ from django.core.files.base import ContentFile
 from deep_translator import GoogleTranslator
 import json
 
-
+### Dohoon
 class Command(BaseCommand):
     help = 'Crawl products from Musinsa website and save to the database'
 

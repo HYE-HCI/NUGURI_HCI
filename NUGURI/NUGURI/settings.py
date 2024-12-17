@@ -68,6 +68,7 @@ MODEL = {
     "edge_detection": edge_session
 }
 
+### Dohoon
 # Application definition
 
 INSTALLED_APPS = [

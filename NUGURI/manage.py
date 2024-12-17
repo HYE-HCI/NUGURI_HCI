@@ -3,7 +3,7 @@
 import os
 import sys
 
-
+### Dohoon
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'NUGURI.settings')

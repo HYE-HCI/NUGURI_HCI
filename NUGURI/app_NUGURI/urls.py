@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    ### Dohoon
     path('products/', product_list_view, name='product_list'),
     path('products/<int:product_id>/', product_detail_view, name='product_detail'),
     ### Hyunwook
