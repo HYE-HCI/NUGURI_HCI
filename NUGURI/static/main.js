@@ -1,5 +1,6 @@
 import { myDotPad, testDisplayOnDotPad } from "./DotPad_CSUNdemo_chart2.js";
 window.binaryArrays = [];
+// Nayoung
 window.positions = [
   [
     "전체",
@@ -102,6 +103,8 @@ window.positions = [
     ],
   ],
 ];
+//
+
 document.addEventListener("DOMContentLoaded", function () {
   const processImageBtn = document.getElementById("processImageBtn");
 
@@ -173,20 +176,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
-  // 버튼 토글 함수
-  //   window.toggleButton = function () {
-  //       var buttonImg = document.getElementById("buttonImage");
-  //       if (buttonImg.alt === "OFF") {
-  //           buttonImg.src = "/static/images/on_button.jpg";
-  //           buttonImg.alt = "ON";
-  //           onConnectButtonClick();
-  //       } else {
-  //           buttonImg.src = "/static/images/off_button.jpg";
-  //           buttonImg.alt = "OFF";
-  //           onDisconnectButtonClick();
-  //       }
-  //   };
 
   // 초기화 시 전체 이미지 표시
   filterImages("all");

@@ -20,6 +20,7 @@ def product_list_view(request):
     products = Product.objects.all()
     return render(request, 'app_NUGURI/product_list.html', {'products': products})
 
+### Nayoung
 def product_detail_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     try:
