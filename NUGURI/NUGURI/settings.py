@@ -62,9 +62,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+
+### Areum
 segmentation_model_path = os.path.join(BASE_DIR, "clothes_seg.onnx")
 edge_detection_model_path = os.path.join(BASE_DIR, "edge_detection.onnx")
-print(segmentation_model_path)
 segmentation_session = ort.InferenceSession(segmentation_model_path, providers=['CUDAExecutionProvider'])
 
 image = np.random.randn(3, 768, 768).astype(np.float32)
@@ -78,8 +79,6 @@ input_image = np.expand_dims(image, axis=0)  # 배치 차원 추가
 edge_session = ort.InferenceSession(edge_detection_model_path, providers=['CUDAExecutionProvider'])
 inputs = {edge_session.get_inputs()[0].name: input_image}
 edge_session.run(None, inputs)
-
-
 
 
 MODEL = {
