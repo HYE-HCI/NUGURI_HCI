@@ -72,7 +72,7 @@ We are Team HCI, a group of third-year students from the Department of Artificia
  ┃ ┣ 📜edge.py
  ┃ ┣ 📜edge_detection.onnx
  ┃ ┣ 📜manage.py
- ┃ ┗  📜secret_key.txt
+ ┃ ┗ 📜secrets.json
  ┣ 📜.gitignore
  ┣ 📜LICENSE
  ┗ 📜README.md
